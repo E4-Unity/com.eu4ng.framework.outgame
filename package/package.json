@@ -8,5 +8,8 @@
         "email": "eu4ng97@gmail.com",
         "url": "https://github.com/Eu4ng"
     },
-    "description": "OutGame Framework"
+    "description": "OutGame Framework",
+    "dependencies": {
+        "com.eu4ng.manager.singleton": "https://github.com/E4-Unity/com.eu4ng.manager.singleton.git?path=/package"
+    }
 }
