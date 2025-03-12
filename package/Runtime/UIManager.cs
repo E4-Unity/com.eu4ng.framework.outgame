@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using Eu4ng.Manager.Singleton;
+
 namespace Eu4ng.Framework.OutGame
 {
     public class UIManager : MonoSingleton<UIManager>
