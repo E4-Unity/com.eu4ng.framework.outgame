@@ -5,7 +5,7 @@ using Eu4ng.Manager.Singleton;
 
 namespace Eu4ng.Framework.OutGame
 {
-    public class UIManager : MonoSingleton<UIManager>
+    public class UIManager : MonoSingleton<UIManager>, IUIManager
     {
         [SerializeField]
         protected Canvas m_Canvas;
@@ -16,7 +16,7 @@ namespace Eu4ng.Framework.OutGame
         protected Dictionary<RectTransform, RectTransform> m_StartupWidgetDictionary =
             new Dictionary<RectTransform, RectTransform>();
 
-        /* UIManager */
+        /* IUIManager */
 
         public virtual void AddWidget(RectTransform widgetPrefab)
         {
