@@ -18,16 +18,28 @@ namespace Eu4ng.Framework.OutGame
 
         /* IUIManager */
 
+        public virtual bool FindWidget(RectTransform widgetPrefab) => widgetPrefab != null && m_StartupWidgetDictionary.ContainsKey(widgetPrefab);
+
         public virtual void AddWidget(RectTransform widgetPrefab)
         {
             // 유효성 검사
             if (widgetPrefab == null) return;
             if (!m_Canvas) return;
 
-            RectTransform widgetInstance = Instantiate(widgetPrefab, m_Canvas.transform);
-            m_StartupWidgetDictionary.Add(widgetPrefab, widgetInstance);
+            // 중복 검사
+            if (FindWidget(widgetPrefab))
+            {
+                Debug.LogWarning("Widget(" + widgetPrefab.gameObject.name + ") is already added.");
+            }
+            else
+            {
+                RectTransform widgetInstance = Instantiate(widgetPrefab, m_Canvas.transform);
+                m_StartupWidgetDictionary.Add(widgetPrefab, widgetInstance);
 
-            Debug.Log("Add widget(" + widgetPrefab.gameObject.name + ")");
+                Debug.Log("Add widget(" + widgetPrefab.gameObject.name + ")");
+            }
+
+            ShowWidget(widgetPrefab);
         }
 
         public virtual void RemoveWidget(RectTransform widgetPrefab)
