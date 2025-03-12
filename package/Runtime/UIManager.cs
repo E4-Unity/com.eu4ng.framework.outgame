@@ -20,6 +20,8 @@ namespace Eu4ng.Framework.OutGame
 
         public virtual void AddWidget(RectTransform widgetPrefab)
         {
+            // 유효성 검사
+            if (widgetPrefab == null) return;
             if (!m_Canvas) return;
 
             RectTransform widgetInstance = Instantiate(widgetPrefab, m_Canvas.transform);
@@ -30,6 +32,8 @@ namespace Eu4ng.Framework.OutGame
 
         public virtual void RemoveWidget(RectTransform widgetPrefab)
         {
+            // 유효성 검사
+            if (widgetPrefab == null) return;
             if (!m_StartupWidgetDictionary.TryGetValue(widgetPrefab, out var widgetInstance)) return;
 
             Destroy(widgetInstance.gameObject);
@@ -49,6 +53,8 @@ namespace Eu4ng.Framework.OutGame
 
         public virtual void ShowWidget(RectTransform widgetPrefab)
         {
+            // 유효성 검사
+            if (widgetPrefab == null) return;
             if (!m_StartupWidgetDictionary.TryGetValue(widgetPrefab, out var widgetInstance)) return;
 
             if (!widgetInstance.gameObject.activeSelf)
@@ -64,6 +70,8 @@ namespace Eu4ng.Framework.OutGame
 
         public virtual void HideWidget(RectTransform widgetPrefab)
         {
+            // 유효성 검사
+            if (widgetPrefab == null) return;
             if (!m_StartupWidgetDictionary.TryGetValue(widgetPrefab, out var widgetInstance)) return;
 
             if (widgetInstance.gameObject.activeSelf)
