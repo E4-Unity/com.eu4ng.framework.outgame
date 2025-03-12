@@ -26,10 +26,10 @@ namespace Eu4ng.Framework.OutGame
             ShowOptionsWidget();
         }
 
-        public virtual void OnQuitButtonClicked()
+        public virtual void OnExitButtonClicked()
         {
-            Debug.Log("Quit Button Clicked");
-            Quit();
+            Debug.Log("Exit Button Clicked");
+            Exit();
         }
 
         protected virtual void OpenMainScene()
@@ -49,7 +49,7 @@ namespace Eu4ng.Framework.OutGame
             AddWidget(m_OptionsWidget);
         }
 
-        protected virtual void Quit()
+        protected virtual void Exit()
         {
 #if UNITY_EDITOR
             EditorApplication.isPlaying = false;
