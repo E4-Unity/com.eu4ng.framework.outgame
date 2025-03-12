@@ -13,12 +13,6 @@ namespace Eu4ng.Framework.OutGame
 
         /* IUIManager */
 
-        public void AddWidget(RectTransform widgetPrefab) => UIManagerInterface.AddWidget(widgetPrefab);
-
-        public void RemoveWidget(RectTransform widgetPrefab) => UIManagerInterface.RemoveWidget(widgetPrefab);
-
-        public void RemoveAllWidgets() => UIManagerInterface.RemoveAllWidgets();
-
         public void ShowWidget(RectTransform widgetPrefab) => UIManagerInterface.ShowWidget(widgetPrefab);
 
         public void HideWidget(RectTransform widgetPrefab) => UIManagerInterface.HideWidget(widgetPrefab);

@@ -13,62 +13,23 @@ namespace Eu4ng.Framework.OutGame
         [SerializeField]
         protected List<RectTransform> m_StartupWidgetPrefabs = new List<RectTransform>();
 
-        protected Dictionary<RectTransform, RectTransform> m_StartupWidgetDictionary =
+        protected Dictionary<RectTransform, RectTransform> m_WidgetDictionary =
             new Dictionary<RectTransform, RectTransform>();
 
         /* IUIManager */
-
-        public virtual bool FindWidget(RectTransform widgetPrefab) => widgetPrefab != null && m_StartupWidgetDictionary.ContainsKey(widgetPrefab);
-
-        public virtual void AddWidget(RectTransform widgetPrefab)
-        {
-            // 유효성 검사
-            if (widgetPrefab == null) return;
-            if (!m_Canvas) return;
-
-            // 중복 검사
-            if (FindWidget(widgetPrefab))
-            {
-                Debug.LogWarning("Widget(" + widgetPrefab.gameObject.name + ") is already added.");
-            }
-            else
-            {
-                RectTransform widgetInstance = Instantiate(widgetPrefab, m_Canvas.transform);
-                m_StartupWidgetDictionary.Add(widgetPrefab, widgetInstance);
-
-                Debug.Log("Add widget(" + widgetPrefab.gameObject.name + ")");
-            }
-
-            ShowWidget(widgetPrefab);
-        }
-
-        public virtual void RemoveWidget(RectTransform widgetPrefab)
-        {
-            // 유효성 검사
-            if (widgetPrefab == null) return;
-            if (!m_StartupWidgetDictionary.TryGetValue(widgetPrefab, out var widgetInstance)) return;
-
-            Destroy(widgetInstance.gameObject);
-            m_StartupWidgetDictionary.Remove(widgetPrefab);
-
-            Debug.Log("Remove widget(" + widgetPrefab.gameObject.name + ")");
-        }
-
-        public virtual void RemoveAllWidgets()
-        {
-            List<RectTransform> widgetPrefabs = new List<RectTransform>(m_StartupWidgetDictionary.Keys);
-            foreach (var widgetPrefab in widgetPrefabs)
-            {
-                RemoveWidget(widgetPrefab);
-            }
-        }
 
         public virtual void ShowWidget(RectTransform widgetPrefab)
         {
             // 유효성 검사
             if (widgetPrefab == null) return;
-            if (!m_StartupWidgetDictionary.TryGetValue(widgetPrefab, out var widgetInstance)) return;
 
+            // 등록되지 않은 경우 새로 등록
+            if(!m_WidgetDictionary.ContainsKey(widgetPrefab)) AddWidget(widgetPrefab);
+
+            // 등록 여부 확인
+            if (!m_WidgetDictionary.TryGetValue(widgetPrefab, out var widgetInstance)) return;
+
+            // 표시 여부 확인
             if (!widgetInstance.gameObject.activeSelf)
             {
                 Debug.Log("Show Widget(" + widgetPrefab.gameObject.name + ")");
@@ -84,8 +45,11 @@ namespace Eu4ng.Framework.OutGame
         {
             // 유효성 검사
             if (widgetPrefab == null) return;
-            if (!m_StartupWidgetDictionary.TryGetValue(widgetPrefab, out var widgetInstance)) return;
 
+            // 등록 여부 확인
+            if (!m_WidgetDictionary.TryGetValue(widgetPrefab, out var widgetInstance)) return;
+
+            // 표시 여부 확인
             if (widgetInstance.gameObject.activeSelf)
             {
                 Debug.Log("Hide Widget(" + widgetPrefab.gameObject.name + ")");
@@ -94,6 +58,57 @@ namespace Eu4ng.Framework.OutGame
             else
             {
                 Debug.LogWarning("Widget(" + widgetPrefab.gameObject.name + ") is already invisible.");
+            }
+        }
+
+        /* UIManagerBase */
+
+        protected virtual bool AddWidget(RectTransform widgetPrefab)
+        {
+            // 유효성 검사
+            if (widgetPrefab == null) return false;
+            if (!m_Canvas) return false;
+
+            // 중복 검사
+            if (m_WidgetDictionary.ContainsKey(widgetPrefab))
+            {
+                Debug.LogWarning("Widget(" + widgetPrefab.gameObject.name + ") is already added.");
+                return false;
+            }
+            else
+            {
+                // 위젯 인스턴스 생성 및 등록
+                RectTransform widgetInstance = Instantiate(widgetPrefab, m_Canvas.transform);
+                m_WidgetDictionary.Add(widgetPrefab, widgetInstance);
+
+                Debug.Log("Add widget(" + widgetPrefab.gameObject.name + ")");
+                return true;
+            }
+        }
+
+        protected virtual bool RemoveWidget(RectTransform widgetPrefab)
+        {
+            // 유효성 검사
+            if (widgetPrefab == null) return false;
+
+            // 등록 여부 확인
+            if (!m_WidgetDictionary.TryGetValue(widgetPrefab, out var widgetInstance)) return false;
+
+            // 위젯 인스턴스 파괴 및 등록 해제
+            Destroy(widgetInstance.gameObject);
+            m_WidgetDictionary.Remove(widgetPrefab);
+
+            Debug.Log("Remove widget(" + widgetPrefab.gameObject.name + ")");
+
+            return true;
+        }
+
+        protected virtual void RemoveAllWidgets()
+        {
+            List<RectTransform> widgetPrefabs = new List<RectTransform>(m_WidgetDictionary.Keys);
+            foreach (var widgetPrefab in widgetPrefabs)
+            {
+                RemoveWidget(widgetPrefab);
             }
         }
 

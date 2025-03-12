@@ -67,7 +67,7 @@ namespace Eu4ng.Framework.OutGame
 
         protected virtual void ShowOptionsWidget()
         {
-            AddWidget(m_OptionsWidget);
+            ShowWidget(m_OptionsWidget);
         }
 
         protected virtual void Exit()
