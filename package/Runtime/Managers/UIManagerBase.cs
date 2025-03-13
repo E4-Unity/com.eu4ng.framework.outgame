@@ -132,7 +132,7 @@ namespace Eu4ng.Framework.OutGame
 
             foreach (var widgetPrefab in m_StartupWidgetPrefabs)
             {
-                AddWidget(widgetPrefab);
+                ShowWidget(widgetPrefab);
             }
         }
     }
