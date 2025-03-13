@@ -66,7 +66,7 @@ namespace Eu4ng.Framework.OutGame
         protected virtual bool AddWidget(RectTransform widgetPrefab)
         {
             // 유효성 검사
-            if (widgetPrefab == null) return false;
+            if (widgetPrefab == null || widgetPrefab.GetComponent<IUserWidget>() == null) return false;
             if (!m_Canvas) return false;
 
             // 중복 검사
@@ -79,6 +79,8 @@ namespace Eu4ng.Framework.OutGame
             {
                 // 위젯 인스턴스 생성 및 등록
                 RectTransform widgetInstance = Instantiate(widgetPrefab, m_Canvas.transform);
+                IUserWidget userWidget = widgetInstance.GetComponent<IUserWidget>();
+                userWidget.Prefab = widgetPrefab;
                 m_WidgetDictionary.Add(widgetPrefab, widgetInstance);
 
                 Debug.Log("Add widget(" + widgetPrefab.gameObject.name + ")");
