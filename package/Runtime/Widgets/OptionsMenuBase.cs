@@ -29,6 +29,8 @@ namespace Eu4ng.Framework.OutGame
         protected virtual void OnConfirmButtonClicked()
         {
             Debug.Log("Confirm Button Clicked");
+
+            Hide();
         }
     }
 }
