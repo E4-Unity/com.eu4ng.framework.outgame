@@ -23,11 +23,8 @@ namespace Eu4ng.Framework.OutGame
             // 유효성 검사
             if (widgetPrefab == null) return;
 
-            // 등록되지 않은 경우 새로 등록
-            if(!m_WidgetDictionary.ContainsKey(widgetPrefab)) AddWidget(widgetPrefab);
-
-            // 등록 여부 확인
-            if (!m_WidgetDictionary.TryGetValue(widgetPrefab, out var widgetInstance)) return;
+            // 위젯 인스턴스 생성 혹은 가져오기
+            RectTransform widgetInstance = m_WidgetDictionary.TryGetValue(widgetPrefab, out var cachedWidgetInstance) ? cachedWidgetInstance : AddWidget(widgetPrefab);
 
             // 표시 여부 확인
             if (!widgetInstance.gameObject.activeSelf)
@@ -63,26 +60,26 @@ namespace Eu4ng.Framework.OutGame
 
         /* UIManagerBase */
 
-        protected virtual bool AddWidget(RectTransform widgetPrefab)
+        protected virtual RectTransform AddWidget(RectTransform widgetPrefab)
         {
             // 유효성 검사
-            if (widgetPrefab == null || widgetPrefab.GetComponent<IUserWidget>() == null) return false;
-            if (!m_Canvas) return false;
+            if (widgetPrefab == null || widgetPrefab.GetComponent<IUserWidget>() == null) return null;
+            if (!m_Canvas) return null;
 
             // 중복 검사
-            if (m_WidgetDictionary.ContainsKey(widgetPrefab))
+            if (m_WidgetDictionary.TryGetValue(widgetPrefab, out var widgetInstance))
             {
                 Debug.LogWarning("Widget(" + widgetPrefab.gameObject.name + ") is already added.");
-                return false;
+                return widgetInstance;
             }
             else
             {
                 // 위젯 인스턴스 생성 및 등록
-                RectTransform widgetInstance = CreateWidgetInstance(widgetPrefab);
+                widgetInstance = CreateWidgetInstance(widgetPrefab);
                 m_WidgetDictionary.Add(widgetPrefab, widgetInstance);
 
                 Debug.Log("Add widget(" + widgetPrefab.gameObject.name + ")");
-                return true;
+                return widgetInstance;
             }
         }
 
