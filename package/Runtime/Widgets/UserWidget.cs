@@ -14,6 +14,8 @@ namespace Eu4ng.Framework.OutGame
         protected virtual IUIManager UIManagerInterface => UIManager.Instance;
         protected virtual IModalManager ModalManagerInterface => GlobalUIManager.Instance;
 
+        protected virtual void Refresh() { }
+
         /* IUserWidget */
 
         public RectTransform Prefab
