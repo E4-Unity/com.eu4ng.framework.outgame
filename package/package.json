@@ -11,5 +11,12 @@
     "description": "OutGame Framework",
     "dependencies": {
         "com.eu4ng.manager.singleton": "https://github.com/E4-Unity/com.eu4ng.manager.singleton.git?path=/package#v0.1.0"
-    }
+    },
+    "samples": [
+        {
+            "displayName": "OutGameFramework Sample",
+            "description": "Sample assets for OutGameFramework package",
+            "path": "Samples~/SamplesOutGameFramework"
+        }
+    ]
 }
