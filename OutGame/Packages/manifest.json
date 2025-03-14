@@ -1,5 +1,7 @@
 {
   "dependencies": {
+    "com.eu4ng.framework.outgame": "file:../../package",
+    "com.eu4ng.manager.singleton": "https://github.com/E4-Unity/com.eu4ng.manager.singleton.git?path=/package",
     "com.unity.collab-proxy": "2.7.1",
     "com.unity.feature.2d": "2.0.1",
     "com.unity.ide.rider": "3.0.31",
