@@ -18,6 +18,13 @@ namespace Eu4ng.Framework.OutGame
 
         /* IUIManager */
 
+        public RectTransform GetWidgetInstance(RectTransform widgetPrefab)
+        {
+            m_WidgetDictionary.TryGetValue(widgetPrefab, out var widgetInstance);
+
+            return widgetInstance;
+        }
+
         public virtual void ShowWidget(RectTransform widgetPrefab)
         {
             // 유효성 검사

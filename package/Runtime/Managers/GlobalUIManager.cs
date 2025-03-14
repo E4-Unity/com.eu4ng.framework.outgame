@@ -20,10 +20,10 @@ namespace Eu4ng.Framework.OutGame
 
             Debug.Log("Title: " + requestData.Title + ", Message: " + requestData.Message);
 
-            var widgetInstance = AddWidget(widgetPrefab);
-            IModalWidget modalWidget = widgetInstance.GetComponent<IModalWidget>();
-            modalWidget.RequestData = requestData;
             ShowWidget(widgetPrefab);
+
+            IModalWidget modalWidget = GetWidgetInstance(widgetPrefab).GetComponent<IModalWidget>();
+            modalWidget.RequestData = requestData;
         }
 
         /* IModalManager */
