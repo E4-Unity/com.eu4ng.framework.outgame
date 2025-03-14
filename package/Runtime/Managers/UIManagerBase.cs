@@ -78,14 +78,27 @@ namespace Eu4ng.Framework.OutGame
             else
             {
                 // 위젯 인스턴스 생성 및 등록
-                RectTransform widgetInstance = Instantiate(widgetPrefab, m_Canvas.transform);
-                IUserWidget userWidget = widgetInstance.GetComponent<IUserWidget>();
-                userWidget.Prefab = widgetPrefab;
+                RectTransform widgetInstance = CreateWidgetInstance(widgetPrefab);
                 m_WidgetDictionary.Add(widgetPrefab, widgetInstance);
 
                 Debug.Log("Add widget(" + widgetPrefab.gameObject.name + ")");
                 return true;
             }
+        }
+
+        protected virtual RectTransform CreateWidgetInstance(RectTransform widgetPrefab)
+        {
+            // 위젯 인스턴스 생성
+            bool cachedActiveSelf = widgetPrefab.gameObject.activeSelf;
+            widgetPrefab.gameObject.SetActive(false);
+            RectTransform widgetInstance = Instantiate(widgetPrefab, m_Canvas.transform);
+            widgetPrefab.gameObject.SetActive(cachedActiveSelf);
+
+            // 위젯 인스턴스 초기화
+            IUserWidget userWidget = widgetInstance.GetComponent<IUserWidget>();
+            userWidget.Prefab = widgetPrefab;
+
+            return widgetInstance;
         }
 
         protected virtual bool RemoveWidget(RectTransform widgetPrefab)
