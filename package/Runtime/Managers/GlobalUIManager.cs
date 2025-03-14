@@ -18,6 +18,8 @@ namespace Eu4ng.Framework.OutGame
         {
             if (widgetPrefab == null || widgetPrefab.GetComponent<IModalWidget>() == null) return;
 
+            Debug.Log("Title: " + requestData.Title + "\nMessage: " + requestData.Message);
+
             var widgetInstance = AddWidget(widgetPrefab);
             IModalWidget modalWidget = widgetInstance.GetComponent<IModalWidget>();
             modalWidget.RequestData = requestData;

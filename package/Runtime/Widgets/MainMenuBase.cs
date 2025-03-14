@@ -50,7 +50,14 @@ namespace Eu4ng.Framework.OutGame
         public virtual void OnExitButtonClicked()
         {
             Debug.Log("Exit Button Clicked");
-            Exit();
+
+            ModalRequestData exitRequestData = new ModalRequestData
+            {
+                Title = "Exit Game",
+                Message = "Are you sure you want to exit?",
+                Confirmed = Exit
+            };
+            RequestConfirm(exitRequestData);
         }
 
         protected virtual void OpenMainScene()
