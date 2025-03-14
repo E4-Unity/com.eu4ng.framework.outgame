@@ -44,7 +44,11 @@ namespace Eu4ng.Framework.OutGame
             if (widgetPrefab == null) return;
 
             // 등록 여부 확인
-            if (!m_WidgetDictionary.TryGetValue(widgetPrefab, out var widgetInstance)) return;
+            if (!m_WidgetDictionary.TryGetValue(widgetPrefab, out var widgetInstance))
+            {
+                Debug.Log("Widget(" + widgetPrefab.gameObject.name + ") is not added.");
+                return;
+            }
 
             // 표시 여부 확인
             if (widgetInstance.gameObject.activeSelf)

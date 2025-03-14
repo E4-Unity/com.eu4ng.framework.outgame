@@ -33,6 +33,10 @@ namespace Eu4ng.Framework.OutGame
             Hide();
         }
 
+        /* UserWidget */
+
+        protected override IUIManager UIManagerInterface => GlobalUIManager.Instance;
+
         /* MonoBehaviour */
 
         protected override void Awake()
