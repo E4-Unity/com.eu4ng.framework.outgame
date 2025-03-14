@@ -37,19 +37,19 @@ namespace Eu4ng.Framework.OutGame
 
         public virtual void OnPlayButtonClicked()
         {
-            Debug.Log("Play Button Clicked");
+            LogOutGameFramework.Log("Play Button Clicked");
             OpenMainScene();
         }
 
         public virtual void OnOptionsButtonClicked()
         {
-            Debug.Log("Options Button Clicked");
+            LogOutGameFramework.Log("Options Button Clicked");
             ShowOptionsWidget();
         }
 
         public virtual void OnExitButtonClicked()
         {
-            Debug.Log("Exit Button Clicked");
+            LogOutGameFramework.Log("Exit Button Clicked");
 
             ModalRequestData exitRequestData = new ModalRequestData
             {

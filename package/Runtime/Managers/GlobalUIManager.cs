@@ -18,7 +18,7 @@ namespace Eu4ng.Framework.OutGame
         {
             if (widgetPrefab == null || widgetPrefab.GetComponent<IModalWidget>() == null) return;
 
-            Debug.Log("Title: " + requestData.Title + ", Message: " + requestData.Message);
+            LogOutGameFramework.Log("Title: " + requestData.Title + ", Message: " + requestData.Message);
 
             ShowWidget(widgetPrefab);
 

@@ -23,12 +23,12 @@ namespace Eu4ng.Framework.OutGame
 
         protected virtual void OnApplyButtonClicked()
         {
-            Debug.Log("Apply Button Clicked");
+            LogOutGameFramework.Log("Apply Button Clicked");
         }
 
         protected virtual void OnConfirmButtonClicked()
         {
-            Debug.Log("Confirm Button Clicked");
+            LogOutGameFramework.Log("Confirm Button Clicked");
 
             Hide();
         }

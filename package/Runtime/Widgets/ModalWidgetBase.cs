@@ -32,7 +32,7 @@ namespace Eu4ng.Framework.OutGame
 
         protected virtual void OnConfirmButtonClicked()
         {
-            Debug.Log("ConfirmButton Clicked.");
+            LogOutGameFramework.Log("ConfirmButton Clicked.");
             if(m_InputField != null) RequestData.InputSubmitted?.Invoke(m_InputField.text);
             RequestData.Confirmed?.Invoke();
 
@@ -41,7 +41,7 @@ namespace Eu4ng.Framework.OutGame
 
         protected virtual void OnCancelButtonClicked()
         {
-            Debug.Log("CancelButton Clicked.");
+            LogOutGameFramework.Log("CancelButton Clicked.");
             RequestData.Canceled?.Invoke();
 
             Hide();

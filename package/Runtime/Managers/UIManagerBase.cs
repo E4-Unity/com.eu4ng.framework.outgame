@@ -36,12 +36,12 @@ namespace Eu4ng.Framework.OutGame
             // 표시 여부 확인
             if (!widgetInstance.gameObject.activeSelf)
             {
-                Debug.Log("Show Widget(" + widgetPrefab.gameObject.name + ")");
+                LogOutGameFramework.Log("Show Widget(" + widgetPrefab.gameObject.name + ")");
                 widgetInstance.gameObject.SetActive(true);
             }
             else
             {
-                Debug.LogWarning("Widget(" + widgetPrefab.gameObject.name + ") is already visible.");
+                LogOutGameFramework.LogWarning("Widget(" + widgetPrefab.gameObject.name + ") is already visible.");
             }
         }
 
@@ -53,19 +53,19 @@ namespace Eu4ng.Framework.OutGame
             // 등록 여부 확인
             if (!m_WidgetDictionary.TryGetValue(widgetPrefab, out var widgetInstance))
             {
-                Debug.Log("Widget(" + widgetPrefab.gameObject.name + ") is not added.");
+                LogOutGameFramework.Log("Widget(" + widgetPrefab.gameObject.name + ") is not added.");
                 return;
             }
 
             // 표시 여부 확인
             if (widgetInstance.gameObject.activeSelf)
             {
-                Debug.Log("Hide Widget(" + widgetPrefab.gameObject.name + ")");
+                LogOutGameFramework.Log("Hide Widget(" + widgetPrefab.gameObject.name + ")");
                 widgetInstance.gameObject.SetActive(false);
             }
             else
             {
-                Debug.LogWarning("Widget(" + widgetPrefab.gameObject.name + ") is already invisible.");
+                LogOutGameFramework.LogWarning("Widget(" + widgetPrefab.gameObject.name + ") is already invisible.");
             }
         }
 
@@ -80,7 +80,7 @@ namespace Eu4ng.Framework.OutGame
             // 중복 검사
             if (m_WidgetDictionary.TryGetValue(widgetPrefab, out var widgetInstance))
             {
-                Debug.LogWarning("Widget(" + widgetPrefab.gameObject.name + ") is already added.");
+                LogOutGameFramework.LogWarning("Widget(" + widgetPrefab.gameObject.name + ") is already added.");
                 return widgetInstance;
             }
             else
@@ -89,7 +89,7 @@ namespace Eu4ng.Framework.OutGame
                 widgetInstance = CreateWidgetInstance(widgetPrefab);
                 m_WidgetDictionary.Add(widgetPrefab, widgetInstance);
 
-                Debug.Log("Add widget(" + widgetPrefab.gameObject.name + ")");
+                LogOutGameFramework.Log("Add widget(" + widgetPrefab.gameObject.name + ")");
                 return widgetInstance;
             }
         }
@@ -121,7 +121,7 @@ namespace Eu4ng.Framework.OutGame
             Destroy(widgetInstance.gameObject);
             m_WidgetDictionary.Remove(widgetPrefab);
 
-            Debug.Log("Remove widget(" + widgetPrefab.gameObject.name + ")");
+            LogOutGameFramework.Log("Remove widget(" + widgetPrefab.gameObject.name + ")");
 
             return true;
         }
