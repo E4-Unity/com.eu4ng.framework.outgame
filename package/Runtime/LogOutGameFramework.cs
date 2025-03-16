@@ -106,7 +106,7 @@ namespace Eu4ng.Framework.OutGame
         }
 
 #if UNITY_EDITOR
-        [OnOpenAsset]
+        [OnOpenAsset(0)]
         private static bool OnOpenDebugLog(int instance, int line)
         {
             string name = EditorUtility.InstanceIDToObject(instance).name;
