@@ -9,11 +9,11 @@
       }
     },
     "com.eu4ng.manager.singleton": {
-      "version": "https://github.com/E4-Unity/com.eu4ng.manager.singleton.git?path=/package",
+      "version": "https://github.com/E4-Unity/com.eu4ng.manager.singleton.git?path=/package#v0.1.0",
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "49a99406ea68e7eb619e9ba3bab2684b42281279"
+      "hash": "9f60c230f3c4fac95b3c244bd53666624b205a6f"
     },
     "com.unity.2d.animation": {
       "version": "10.1.4",

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 155d399953c215a429faddc98a0bfb89, type: 3}
   m_Name: SingletonManagerSettings
   m_EditorClassIdentifier: 
-  m_SingletonPrefabs:
+  m_GlobalPrefabs:
   - {fileID: 7872116681972888809, guid: 0332aaad565036f498de59c8ece5ca03, type: 3}
   - {fileID: 3112645170308784989, guid: 65b146fc069b503418ac55e0f81f4263, type: 3}
+  m_ScenePrefabsConfig: {fileID: 0}

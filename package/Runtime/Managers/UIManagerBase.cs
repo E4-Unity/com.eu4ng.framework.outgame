@@ -135,6 +135,10 @@ namespace Eu4ng.Framework.OutGame
             }
         }
 
+        /* MonoSingleton */
+
+        protected override void OnInitialize() {}
+
         /* MonoBehaviour */
 
         protected override void Awake()
