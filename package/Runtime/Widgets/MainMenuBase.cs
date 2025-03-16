@@ -19,7 +19,6 @@ namespace Eu4ng.Framework.OutGame
         [SerializeField] protected bool m_UseSceneIndex = true;
         [SerializeField] protected int m_MainSceneIndex = 1;
         [SerializeField] protected string m_MainSceneName = "Main";
-        [SerializeField] protected RectTransform m_OptionsWidget;
 
         /* MonoBehaviour */
 
@@ -44,7 +43,7 @@ namespace Eu4ng.Framework.OutGame
         public virtual void OnOptionsButtonClicked()
         {
             LogOutGameFramework.Log("Options Button Clicked");
-            ShowOptionsWidget();
+            OutGameFrameworkFunctionLibrary.ShowOptionsWidget();
         }
 
         public virtual void OnExitButtonClicked()
@@ -55,7 +54,7 @@ namespace Eu4ng.Framework.OutGame
             {
                 Title = "Exit Game",
                 Message = "Are you sure you want to exit?",
-                Confirmed = Exit
+                Confirmed = OutGameFrameworkFunctionLibrary.Exit
             };
             RequestConfirm(exitRequestData);
         }
@@ -70,20 +69,6 @@ namespace Eu4ng.Framework.OutGame
             {
                 SceneManager.LoadScene(m_MainSceneName);
             }
-        }
-
-        protected virtual void ShowOptionsWidget()
-        {
-            ShowWidget(m_OptionsWidget);
-        }
-
-        protected virtual void Exit()
-        {
-#if UNITY_EDITOR
-            EditorApplication.isPlaying = false;
-#else
-            Application.Quit();
-#endif
         }
     }
 }

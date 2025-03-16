@@ -170,7 +170,6 @@ MonoBehaviour:
   m_UseSceneIndex: 1
   m_MainSceneIndex: 1
   m_MainSceneName: Main
-  m_OptionsWidget: {fileID: 9000029195722245389, guid: 055517f36377f3c49a8b03192199c9a3, type: 3}
 --- !u!1 &1647628563543645341
 GameObject:
   m_ObjectHideFlags: 0
