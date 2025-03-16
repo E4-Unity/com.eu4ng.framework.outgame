@@ -1,16 +1,20 @@
+using System;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 #if UNITY_EDITOR
 using UnityEditor;
+using UnityEditor.Callbacks;
+using UnityEditorInternal;
 #endif
 
 namespace Eu4ng.Framework.OutGame
 {
     public static class LogOutGameFramework
     {
-#if UNITY_EDITOR && LOG_OUTGAMEFRAMEWORK
+#if LOG_OUTGAMEFRAMEWORK
         public static void Log(object message)
         {
             Debug.Log(message);
@@ -101,11 +105,12 @@ namespace Eu4ng.Framework.OutGame
             Debug.AssertFormat(condition, context, message, args);
         }
 
-        [UnityEditor.Callbacks.OnOpenAsset()]
+#if UNITY_EDITOR
+        [OnOpenAsset]
         private static bool OnOpenDebugLog(int instance, int line)
         {
             string name = EditorUtility.InstanceIDToObject(instance).name;
-            if (!name.Equals("Debug")) return false;
+            if (!name.Equals(nameof(LogOutGameFramework))) return false;
 
             // 에디터 콘솔 윈도우의 인스턴스를 찾는다.
             var assembly = Assembly.GetAssembly(typeof(EditorWindow));
@@ -137,15 +142,16 @@ namespace Eu4ng.Framework.OutGame
             {
                 string path = match.Groups[1].Value;
                 var split = path.Split(':');
-                string filePath = split[0];
-                int lineNum = System.Convert.ToInt32(split[1]);
+                string drivePath = split[0];
+                string filePath = split[1];
+                int lineNum = Convert.ToInt32(split[2]);
 
-                string dataPath = UnityEngine.Application.dataPath.Substring(0, UnityEngine.Application.dataPath.LastIndexOf("Assets"));
-                UnityEditorInternal.InternalEditorUtility.OpenFileAtLineExternal(dataPath + filePath, lineNum);
+                InternalEditorUtility.OpenFileAtLineExternal(drivePath + ':' + filePath, lineNum);
                 return true;
             }
             return false;
         }
+#endif
 #else
         public static void Log(object message) {}
         public static void Log(object message, Object context) {}
