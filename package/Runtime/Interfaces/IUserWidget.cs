@@ -9,5 +9,7 @@ namespace Eu4ng.Framework.OutGame
         void Show();
 
         void Hide();
+
+        void Remove();
     }
 }

@@ -31,6 +31,8 @@ namespace Eu4ng.Framework.OutGame
 
         public void Hide() => HideWidget(Prefab);
 
+        public void Remove() => RemoveWidget(Prefab);
+
         /* IUIManager */
 
         public RectTransform GetWidgetInstance(RectTransform widgetPrefab) => UIManagerInterface.GetWidgetInstance(widgetPrefab);
@@ -38,6 +40,8 @@ namespace Eu4ng.Framework.OutGame
         public void ShowWidget(RectTransform widgetPrefab) => UIManagerInterface.ShowWidget(widgetPrefab);
 
         public void HideWidget(RectTransform widgetPrefab) => UIManagerInterface.HideWidget(widgetPrefab);
+
+        public void RemoveWidget(RectTransform widgetPrefab) => UIManagerInterface.RemoveWidget(widgetPrefab);
 
         /* IModalManager */
 

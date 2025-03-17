@@ -76,6 +76,21 @@ namespace Eu4ng.Framework.OutGame
             }
         }
 
+        public virtual void RemoveWidget(RectTransform widgetPrefab)
+        {
+            // 유효성 검사
+            if (widgetPrefab == null) return;
+
+            // 등록 여부 확인
+            if (!m_WidgetDictionary.TryGetValue(widgetPrefab, out var widgetInstance)) return;
+
+            // 위젯 인스턴스 파괴 및 등록 해제
+            Destroy(widgetInstance.gameObject);
+            m_WidgetDictionary.Remove(widgetPrefab);
+
+            LogOutGameFramework.Log("Remove widget(" + widgetPrefab.gameObject.name + ")");
+        }
+
         /* UIManagerBase */
 
         protected virtual RectTransform AddWidget(RectTransform widgetPrefab)
@@ -114,23 +129,6 @@ namespace Eu4ng.Framework.OutGame
             userWidget.Prefab = widgetPrefab;
 
             return widgetInstance;
-        }
-
-        protected virtual bool RemoveWidget(RectTransform widgetPrefab)
-        {
-            // 유효성 검사
-            if (widgetPrefab == null) return false;
-
-            // 등록 여부 확인
-            if (!m_WidgetDictionary.TryGetValue(widgetPrefab, out var widgetInstance)) return false;
-
-            // 위젯 인스턴스 파괴 및 등록 해제
-            Destroy(widgetInstance.gameObject);
-            m_WidgetDictionary.Remove(widgetPrefab);
-
-            LogOutGameFramework.Log("Remove widget(" + widgetPrefab.gameObject.name + ")");
-
-            return true;
         }
 
         protected virtual void RemoveAllWidgets()
