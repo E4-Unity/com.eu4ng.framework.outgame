@@ -16,12 +16,20 @@ namespace Eu4ng.Framework.OutGame
 
         [Header("UI Manager")]
         [SerializeReference] List<SceneWidgetsConfig> m_SceneWidgetsConfigList;
-
         Dictionary<int, List<RectTransform>> m_SceneWidgetsDictionary;
+
+        [Header("Modal")]
+        [SerializeField] RectTransform m_AlertWidgetPrefab;
+        [SerializeField] RectTransform m_ConfirmWidgetPrefab;
+        [SerializeField] RectTransform m_PromptWidgetPrefab;
 
         /* Properties */
 
         public RectTransform OptionsWidget => m_OptionsWidget;
+
+        public RectTransform AlertWidgetPrefab => m_AlertWidgetPrefab;
+        public RectTransform ConfirmWidgetPrefab => m_ConfirmWidgetPrefab;
+        public RectTransform PromptWidgetPrefab => m_PromptWidgetPrefab;
 
         /* OutGameFrameworkSettings */
 

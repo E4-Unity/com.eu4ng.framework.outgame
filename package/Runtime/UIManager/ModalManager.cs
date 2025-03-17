@@ -1,0 +1,47 @@
+using UnityEngine;
+
+namespace Eu4ng.Framework.OutGame
+{
+    public class ModalManager : MonoBehaviour, IModalManager
+    {
+        /* Properties */
+        
+        OutGameFrameworkSettings Settings => OutGameFrameworkSettings.Instance;
+        IUIManager UIManagerInterface => GlobalUIManager.Instance;
+
+        /* IModalManager */
+
+        protected virtual void RequestModal(in ModalRequestData requestData, RectTransform widgetPrefab = null)
+        {
+            if (UIManagerInterface == null) return;
+            if (widgetPrefab == null || widgetPrefab.GetComponent<IModalWidget>() == null) return;
+
+            LogOutGameFramework.Log("Title: " + requestData.Title + ", Message: " + requestData.Message);
+
+            UIManagerInterface.ShowWidget(widgetPrefab);
+
+            IModalWidget modalWidgetInterface = UIManagerInterface.GetWidgetInstance(widgetPrefab).GetComponent<IModalWidget>();
+            modalWidgetInterface.RequestData = requestData;
+        }
+
+        /* IModalManager */
+
+        public virtual void RequestAlert(in ModalRequestData requestData, RectTransform widgetPrefab = null)
+        {
+            widgetPrefab ??= Settings.AlertWidgetPrefab;
+            RequestModal(requestData, widgetPrefab);
+        }
+
+        public virtual void RequestConfirm(in ModalRequestData requestData, RectTransform widgetPrefab = null)
+        {
+            widgetPrefab ??= Settings.ConfirmWidgetPrefab;
+            RequestModal(requestData, widgetPrefab);
+        }
+
+        public virtual void RequestPrompt(in ModalRequestData requestData, RectTransform widgetPrefab = null)
+        {
+            widgetPrefab ??= Settings.PromptWidgetPrefab;
+            RequestModal(requestData, widgetPrefab);
+        }
+    }
+}
