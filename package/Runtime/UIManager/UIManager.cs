@@ -7,7 +7,7 @@ using Eu4ng.Utilities;
 namespace Eu4ng.Framework.OutGame
 {
     [RequireComponent(typeof(DynamicWidgetManager), typeof(ModalManager), typeof(SceneWidgetsManager))]
-    public abstract class UIManager : MonoSingleton<UIManager>, IUIManager, IModalManager
+    public class UIManager : MonoSingleton<UIManager>, IUIManager, IModalManager
     {
         [Header("Components")]
         [SerializeField, ReadOnly] DynamicWidgetManager m_DynamicWidgetManager;
@@ -16,11 +16,6 @@ namespace Eu4ng.Framework.OutGame
 
         IUIManager UIManagerInterface => m_DynamicWidgetManager;
         IModalManager ModalManagerInterface => m_ModalManager;
-
-        /* Fields */
-
-        [SerializeField]
-        protected List<RectTransform> m_StartupWidgetPrefabs = new List<RectTransform>();
 
         /* IUIManager */
 
@@ -47,18 +42,6 @@ namespace Eu4ng.Framework.OutGame
             m_DynamicWidgetManager = GetComponent<DynamicWidgetManager>();
             m_ModalManager = GetComponent<ModalManager>();
             m_SceneWidgetsManager = GetComponent<SceneWidgetsManager>();
-        }
-
-        /* MonoBehaviour */
-
-        protected override void Start()
-        {
-            base.Start();
-
-            foreach (var widgetPrefab in m_StartupWidgetPrefabs)
-            {
-                ShowWidget(widgetPrefab);
-            }
         }
     }
 }
