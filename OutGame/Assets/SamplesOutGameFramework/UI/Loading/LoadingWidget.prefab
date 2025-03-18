@@ -564,7 +564,7 @@ MonoBehaviour:
   <IsGlobalWidget>k__BackingField: 1
   m_FadingImage: {fileID: 1334888190068558914}
   m_LoadingScreen: {fileID: 1488859987240923354}
-  m_LoadingStateText: {fileID: 0}
+  m_LoadingStateText: {fileID: 1025734605493059402}
   m_LoadingPercentageText: {fileID: 8676479973826589610}
   m_LoadingPercentageSlider: {fileID: 3181775447322187619}
 --- !u!1 &7941130597538099483
