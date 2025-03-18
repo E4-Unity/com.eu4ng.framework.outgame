@@ -20,3 +20,4 @@ MonoBehaviour:
   m_SceneWidgetsConfigList:
   - {fileID: 11400000, guid: 3810f0f2dcfbb3648a4e9a1310f4caec, type: 2}
   - {fileID: 11400000, guid: 7c06093fafebfe840b02f8462de940b6, type: 2}
+  m_LoadingWidgetPrefab: {fileID: 1459459123960302276, guid: 8031c1b62f608da4ab6d5cf690849c2e, type: 3}
