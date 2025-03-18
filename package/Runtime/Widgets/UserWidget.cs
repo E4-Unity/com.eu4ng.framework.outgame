@@ -7,12 +7,12 @@ namespace Eu4ng.Framework.OutGame
     /// </summary>
     public abstract class UserWidget : MonoBehaviour, IUserWidget, IUIManager, IModalManager
     {
-        private RectTransform m_Prefab;
+        RectTransform m_Prefab;
 
         /* UserWidget */
 
         protected virtual IUIManager UIManagerInterface => UIManager.Instance;
-        protected virtual IModalManager ModalManagerInterface => GlobalUIManager.Instance;
+        protected virtual IModalManager ModalManagerInterface => UIManager.Instance;
 
         protected virtual void Refresh() { }
 
@@ -21,23 +21,27 @@ namespace Eu4ng.Framework.OutGame
         public RectTransform Prefab
         {
             get => m_Prefab;
-            set
-            {
-                if(m_Prefab == null) m_Prefab = value;
-            }
+            set => m_Prefab ??= value;
         }
 
         public void Show() => ShowWidget(Prefab);
 
         public void Hide() => HideWidget(Prefab);
 
+        public void Remove() => RemoveWidget(Prefab);
+
+        [field: SerializeField]
+        public bool IsGlobalWidget { get; set; }
+
         /* IUIManager */
 
-        public RectTransform GetWidgetInstance(RectTransform widgetPrefab) => UIManagerInterface.GetWidgetInstance(widgetPrefab);
+        public RectTransform GetWidget(RectTransform widgetPrefab) => UIManagerInterface.GetWidget(widgetPrefab);
 
         public void ShowWidget(RectTransform widgetPrefab) => UIManagerInterface.ShowWidget(widgetPrefab);
 
         public void HideWidget(RectTransform widgetPrefab) => UIManagerInterface.HideWidget(widgetPrefab);
+
+        public void RemoveWidget(RectTransform widgetPrefab) => UIManagerInterface.RemoveWidget(widgetPrefab);
 
         /* IModalManager */
 
