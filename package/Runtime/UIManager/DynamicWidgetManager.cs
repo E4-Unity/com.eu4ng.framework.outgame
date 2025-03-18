@@ -25,7 +25,7 @@ namespace Eu4ng.Framework.OutGame
 
         protected virtual void Awake()
         {
-            m_Canvas ??= GetComponentInChildren<Canvas>();
+            if(m_Canvas == null) m_Canvas = GetComponentInChildren<Canvas>();
 
             SceneManager.activeSceneChanged += OnActiveSceneChanged;
         }
