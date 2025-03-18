@@ -15,9 +15,7 @@ namespace Eu4ng.Framework.OutGame.Sample
         [SerializeField] protected Button m_ExitButton;
 
         [Header("Config")]
-        [SerializeField] protected bool m_UseSceneIndex = true;
-        [SerializeField] protected int m_MainSceneIndex = 1;
-        [SerializeField] protected string m_MainSceneName = "Main";
+        [SerializeField] SampleSceneType m_MainScene = SampleSceneType.Main;
 
         /* MonoBehaviour */
 
@@ -60,14 +58,7 @@ namespace Eu4ng.Framework.OutGame.Sample
 
         protected virtual void OpenMainScene()
         {
-            if (m_UseSceneIndex)
-            {
-                SceneManager.LoadScene(m_MainSceneIndex);
-            }
-            else
-            {
-                SceneManager.LoadScene(m_MainSceneName);
-            }
+            SceneLoadingManager.Instance.LoadScene(m_MainScene);
         }
     }
 }
