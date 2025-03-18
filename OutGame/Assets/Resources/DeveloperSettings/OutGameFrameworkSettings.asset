@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: OutGameFrameworkSettings
   m_EditorClassIdentifier: 
   m_OptionsWidget: {fileID: 9000029195722245389, guid: 055517f36377f3c49a8b03192199c9a3, type: 3}
-  m_AlertWidgetPrefab: {fileID: 0}
-  m_ConfirmWidgetPrefab: {fileID: 4354068637851505769, guid: c120a5122b84b8b4e8238a294058e29a, type: 3}
-  m_PromptWidgetPrefab: {fileID: 0}
+  m_AlertWidgetPrefab: {fileID: 1547014582698693752, guid: 9fbaca77e4ea3c44298c1810cca99859, type: 3}
+  m_ConfirmWidgetPrefab: {fileID: 1547014582698693752, guid: 47027e5d25505414f9c4bd46f90fa83a, type: 3}
+  m_PromptWidgetPrefab: {fileID: 1547014582698693752, guid: 88a5f0f5da0d6f849b5e02692f98dba1, type: 3}
   m_GlobalStartupWidgetPrefabs: []
   m_SceneWidgetsConfigList:
   - {fileID: 11400000, guid: 3810f0f2dcfbb3648a4e9a1310f4caec, type: 2}

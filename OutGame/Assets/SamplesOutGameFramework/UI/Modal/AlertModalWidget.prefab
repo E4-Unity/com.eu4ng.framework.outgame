@@ -10,7 +10,23 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2814862933892991785, guid: c120a5122b84b8b4e8238a294058e29a, type: 3}
       propertyPath: m_Name
-      value: ModalWidgetTemplate
+      value: AlertModalWidget
+      objectReference: {fileID: 0}
+    - target: {fileID: 3668214594304469720, guid: c120a5122b84b8b4e8238a294058e29a, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3668214594304469720, guid: c120a5122b84b8b4e8238a294058e29a, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3668214594304469720, guid: c120a5122b84b8b4e8238a294058e29a, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3668214594304469720, guid: c120a5122b84b8b4e8238a294058e29a, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4354068637851505769, guid: c120a5122b84b8b4e8238a294058e29a, type: 3}
       propertyPath: m_Pivot.x
@@ -92,8 +108,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8686673342622800122, guid: c120a5122b84b8b4e8238a294058e29a, type: 3}
+      propertyPath: m_CancelButton
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 1789042609817358403, guid: c120a5122b84b8b4e8238a294058e29a, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c120a5122b84b8b4e8238a294058e29a, type: 3}
