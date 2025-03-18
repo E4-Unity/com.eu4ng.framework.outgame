@@ -1,9 +1,8 @@
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-namespace Eu4ng.Framework.OutGame
+namespace Eu4ng.Framework.OutGame.Sample
 {
     /// <summary>
     /// 일반적인 게임들의 메인 메뉴 위젯 클래스입니다.
