@@ -89,6 +89,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf8f14a223999634a97b46d05bd2c444, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <IsGlobalWidget>k__BackingField: 1
   m_TitleText: {fileID: 0}
   m_MessageText: {fileID: 4386479389919506285}
   m_ConfirmButton: {fileID: 6129822131460142593}

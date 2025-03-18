@@ -6,10 +6,14 @@ namespace Eu4ng.Framework.OutGame
     {
         RectTransform Prefab { get; set; }
 
+        bool IsPrefab => Prefab == null;
+
         void Show();
 
         void Hide();
 
         void Remove();
+
+        bool IsGlobalWidget { get; set; }
     }
 }

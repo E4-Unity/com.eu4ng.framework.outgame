@@ -7,7 +7,7 @@ namespace Eu4ng.Framework.OutGame
     /// </summary>
     public abstract class UserWidget : MonoBehaviour, IUserWidget, IUIManager, IModalManager
     {
-        private RectTransform m_Prefab;
+        RectTransform m_Prefab;
 
         /* UserWidget */
 
@@ -21,10 +21,7 @@ namespace Eu4ng.Framework.OutGame
         public RectTransform Prefab
         {
             get => m_Prefab;
-            set
-            {
-                if(m_Prefab == null) m_Prefab = value;
-            }
+            set => m_Prefab ??= value;
         }
 
         public void Show() => ShowWidget(Prefab);
@@ -32,6 +29,9 @@ namespace Eu4ng.Framework.OutGame
         public void Hide() => HideWidget(Prefab);
 
         public void Remove() => RemoveWidget(Prefab);
+
+        [field: SerializeField]
+        public bool IsGlobalWidget { get; set; }
 
         /* IUIManager */
 

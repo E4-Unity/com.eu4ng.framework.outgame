@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Eu4ng.Framework.OutGame
 {
@@ -24,7 +25,9 @@ namespace Eu4ng.Framework.OutGame
 
         protected virtual void Awake()
         {
-            if(m_Canvas == null) m_Canvas = GetComponentInChildren<Canvas>();
+            m_Canvas ??= GetComponentInChildren<Canvas>();
+
+            SceneManager.activeSceneChanged += OnActiveSceneChanged;
         }
 
         /* IUIManager */
@@ -149,6 +152,33 @@ namespace Eu4ng.Framework.OutGame
             foreach (var widgetPrefab in widgetPrefabs)
             {
                 RemoveWidget(widgetPrefab);
+            }
+        }
+
+        protected virtual void OnActiveSceneChanged(Scene currentScene, Scene nextScene)
+        {
+            DestroySceneWidgets();
+        }
+
+        protected virtual void DestroySceneWidgets()
+        {
+            // GlobalWidget으로 설정된 위젯들을 제외한 모든 위젯 가져오기
+            List<RectTransform> widgetPrefabsToDestroy = new List<RectTransform>(m_WidgetDictionary.Count);
+            foreach (var pair in m_WidgetDictionary)
+            {
+                var widgetPrefab = pair.Key;
+                var widget = pair.Value;
+
+                IUserWidget userWidget = widget.GetComponent<IUserWidget>();
+                if(userWidget.IsGlobalWidget) continue;
+
+                widgetPrefabsToDestroy.Add(widgetPrefab);
+            }
+
+            // GlobalWidget으로 설정된 위젯들을 제외한 모든 위젯 파괴 및 제거
+            foreach (var widgetPrefabToDestroy in widgetPrefabsToDestroy)
+            {
+                RemoveWidget(widgetPrefabToDestroy);
             }
         }
     }
