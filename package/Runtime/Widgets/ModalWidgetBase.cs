@@ -12,7 +12,7 @@ namespace Eu4ng.Framework.OutGame
         [SerializeField] TextMeshProUGUI m_MessageText;
         [SerializeField] Button m_ConfirmButton;
         [SerializeField] Button m_CancelButton;
-        [SerializeField] InputField m_InputField;
+        [SerializeField] TMP_InputField m_InputField;
 
         private ModalRequestData m_RequestData;
 
@@ -55,8 +55,8 @@ namespace Eu4ng.Framework.OutGame
         {
             base.Refresh();
 
-            if(m_TitleText != null) m_TitleText.text = RequestData.Title;
-            if(m_MessageText != null) m_MessageText.text = RequestData.Message;
+            m_TitleText?.SetText(m_RequestData.Title);
+            m_MessageText?.SetText(m_RequestData.Message);
         }
 
         /* MonoBehaviour */
@@ -65,8 +65,8 @@ namespace Eu4ng.Framework.OutGame
         {
             base.Awake();
 
-            if(m_ConfirmButton != null) m_ConfirmButton.onClick.AddListener(OnConfirmButtonClicked);
-            if(m_CancelButton != null) m_CancelButton.onClick.AddListener(OnCancelButtonClicked);
+            m_ConfirmButton?.onClick.AddListener(OnConfirmButtonClicked);
+            m_CancelButton?.onClick.AddListener(OnCancelButtonClicked);
         }
     }
 }
