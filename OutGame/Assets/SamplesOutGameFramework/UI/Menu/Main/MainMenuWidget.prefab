@@ -164,6 +164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7a76c4cc6d1c614a903f55b7e5331e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <IsGlobalWidget>k__BackingField: 0
   m_PlayButton: {fileID: 3189988982905364303}
   m_OptionsButton: {fileID: 5095101849570682583}
   m_ExitButton: {fileID: 8261824442524336698}
