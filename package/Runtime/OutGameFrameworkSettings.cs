@@ -23,7 +23,7 @@ namespace Eu4ng.Framework.OutGame
         [SerializeField] List<RectTransform> m_GlobalWidgetPrefabs;
         [SerializeReference] List<SceneWidgetsConfig> m_SceneWidgetsConfigList;
 
-        Dictionary<int, List<RectTransform>> m_SceneWidgetsDictionary;
+        readonly Dictionary<int, List<RectTransform>> m_SceneWidgetsDictionary = new Dictionary<int, List<RectTransform>>();
 
         /* Properties */
 

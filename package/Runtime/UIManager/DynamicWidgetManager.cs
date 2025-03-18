@@ -39,6 +39,7 @@ namespace Eu4ng.Framework.OutGame
 
             // 위젯 인스턴스 생성 혹은 가져오기
             RectTransform widgetInstance = m_WidgetDictionary.TryGetValue(widgetPrefab, out var cachedWidgetInstance) ? cachedWidgetInstance : AddWidget(widgetPrefab);
+            if (widgetInstance == null) return;
 
             // 표시 여부 확인
             if (!widgetInstance.gameObject.activeSelf)
@@ -97,7 +98,14 @@ namespace Eu4ng.Framework.OutGame
         {
             // 유효성 검사
             if (!CanvasTransform) return null;
-            if (widgetPrefab == null || widgetPrefab.GetComponent<IUserWidget>() == null) return null;
+            if (widgetPrefab == null) return null;
+
+            // 인터페이스 검사
+            if (widgetPrefab.GetComponent<IUserWidget>() == null)
+            {
+                LogOutGameFramework.LogError(widgetPrefab.name + " should implement IUserWidget");
+                return null;
+            }
 
             // 중복 검사
             if (m_WidgetDictionary.TryGetValue(widgetPrefab, out var widgetInstance))
