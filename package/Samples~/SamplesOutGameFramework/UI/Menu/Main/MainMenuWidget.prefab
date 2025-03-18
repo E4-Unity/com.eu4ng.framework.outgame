@@ -164,13 +164,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7a76c4cc6d1c614a903f55b7e5331e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <IsGlobalWidget>k__BackingField: 0
   m_PlayButton: {fileID: 3189988982905364303}
   m_OptionsButton: {fileID: 5095101849570682583}
   m_ExitButton: {fileID: 8261824442524336698}
-  m_UseSceneIndex: 1
-  m_MainSceneIndex: 1
-  m_MainSceneName: Main
-  m_OptionsWidget: {fileID: 9000029195722245389, guid: 055517f36377f3c49a8b03192199c9a3, type: 3}
+  m_MainScene: 1
 --- !u!1 &1647628563543645341
 GameObject:
   m_ObjectHideFlags: 0
