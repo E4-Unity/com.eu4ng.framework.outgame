@@ -34,6 +34,15 @@ namespace Eu4ng.Framework.OutGame
                 UIManagerInterface.ShowWidget(globalStartupWidgetPrefab);
                 var globalStartupWidget = UIManagerInterface.GetWidget(globalStartupWidgetPrefab);
                 m_GlobalStartupWidgets.Add(globalStartupWidget);
+
+                // 위젯 프리팹 설정과 관계없이 위젯 인스턴스의 IsGlobalWidget를 true로 설정
+                var userWidgetInterface = globalStartupWidget.GetComponent<IUserWidget>();
+                if (!userWidgetInterface.IsGlobalWidget)
+                {
+                    userWidgetInterface.IsGlobalWidget = true;
+
+                    LogOutGameFramework.LogWarning(globalStartupWidgetPrefab.name + " is not set as global widget. Force set widgetInstance as global widget.");
+                }
             }
         }
 
@@ -46,12 +55,7 @@ namespace Eu4ng.Framework.OutGame
 
         protected virtual void DestroySceneWidgets()
         {
-            foreach (var sceneWidget in m_SceneStartupWidgets)
-            {
-                IUserWidget userWidgetInterface = sceneWidget.GetComponent<IUserWidget>();
-                userWidgetInterface?.Remove();
-            }
-
+            // DynamicWidgetManager에서 자동으로 제거되므로 m_SceneStartupWidgets 목록만 초기화
             m_SceneStartupWidgets.Clear();
         }
 
@@ -63,6 +67,15 @@ namespace Eu4ng.Framework.OutGame
                 UIManagerInterface.ShowWidget(sceneStartupWidgetPrefab);
                 var sceneStartupWidget = UIManagerInterface.GetWidget(sceneStartupWidgetPrefab);
                 m_SceneStartupWidgets.Add(sceneStartupWidget);
+
+                // 위젯 프리팹 설정과 관계없이 위젯 인스턴스의 IsGlobalWidget를 false로 설정
+                var userWidgetInterface = sceneStartupWidget.GetComponent<IUserWidget>();
+                if (userWidgetInterface.IsGlobalWidget)
+                {
+                    userWidgetInterface.IsGlobalWidget = false;
+
+                    LogOutGameFramework.LogWarning(sceneStartupWidget.name + " is set as global widget. Force set widgetInstance as scene widget.");
+                }
             }
         }
     }
