@@ -12,7 +12,7 @@ namespace Eu4ng.Framework.OutGame
         [SerializeField, ReadOnly] List<RectTransform> m_SceneWidgets = new List<RectTransform>();
 
         OutGameFrameworkSettings Settings => OutGameFrameworkSettings.Instance;
-        IUIManager UIManagerInterface => GlobalUIManager.Instance;
+        IUIManager UIManagerInterface => UIManager.Instance;
 
         protected virtual void Awake()
         {

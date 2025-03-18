@@ -49,7 +49,7 @@ namespace Eu4ng.Framework.OutGame
 
         /* UserWidget */
 
-        protected override IUIManager UIManagerInterface => GlobalUIManager.Instance;
+        protected override IUIManager UIManagerInterface => UIManager.Instance;
 
         protected override void Refresh()
         {

@@ -6,15 +6,16 @@ using Eu4ng.Utilities;
 
 namespace Eu4ng.Framework.OutGame
 {
-    [RequireComponent(typeof(DynamicWidgetManager), typeof(SceneWidgetsManager))]
-    public abstract class UIManagerBase<T> : MonoSingleton<T>, IUIManager where T : UIManagerBase<T>
+    [RequireComponent(typeof(DynamicWidgetManager), typeof(ModalManager), typeof(SceneWidgetsManager))]
+    public abstract class UIManager : MonoSingleton<UIManager>, IUIManager, IModalManager
     {
-        /* Components */
-
+        [Header("Components")]
         [SerializeField, ReadOnly] DynamicWidgetManager m_DynamicWidgetManager;
+        [SerializeField, ReadOnly] ModalManager m_ModalManager;
         [SerializeField, ReadOnly] SceneWidgetsManager m_SceneWidgetsManager;
 
         IUIManager UIManagerInterface => m_DynamicWidgetManager;
+        IModalManager ModalManagerInterface => m_ModalManager;
 
         /* Fields */
 
@@ -31,11 +32,20 @@ namespace Eu4ng.Framework.OutGame
 
         public void RemoveWidget(RectTransform widgetPrefab) => UIManagerInterface.RemoveWidget(widgetPrefab);
 
+        /* IModalManager */
+
+        public void RequestAlert(in ModalRequestData requestData, RectTransform widgetPrefab = null) => ModalManagerInterface.RequestAlert(requestData, widgetPrefab);
+
+        public void RequestConfirm(in ModalRequestData requestData, RectTransform widgetPrefab = null) => ModalManagerInterface.RequestConfirm(requestData, widgetPrefab);
+
+        public void RequestPrompt(in ModalRequestData requestData, RectTransform widgetPrefab = null) => ModalManagerInterface.RequestPrompt(requestData, widgetPrefab);
+
         /* MonoSingleton */
 
         protected override void OnInitialize()
         {
             m_DynamicWidgetManager = GetComponent<DynamicWidgetManager>();
+            m_ModalManager = GetComponent<ModalManager>();
             m_SceneWidgetsManager = GetComponent<SceneWidgetsManager>();
         }
 

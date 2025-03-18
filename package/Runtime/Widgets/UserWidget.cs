@@ -12,7 +12,7 @@ namespace Eu4ng.Framework.OutGame
         /* UserWidget */
 
         protected virtual IUIManager UIManagerInterface => UIManager.Instance;
-        protected virtual IModalManager ModalManagerInterface => GlobalUIManager.Instance;
+        protected virtual IModalManager ModalManagerInterface => UIManager.Instance;
 
         protected virtual void Refresh() { }
 

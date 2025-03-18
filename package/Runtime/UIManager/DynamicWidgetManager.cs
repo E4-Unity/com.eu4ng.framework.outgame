@@ -92,7 +92,7 @@ namespace Eu4ng.Framework.OutGame
             LogOutGameFramework.Log("Remove widget(" + widgetPrefab.gameObject.name + ")");
         }
 
-        /* UIManagerBase */
+        /* UIManager */
 
         protected virtual RectTransform AddWidget(RectTransform widgetPrefab)
         {

@@ -2,12 +2,16 @@ using UnityEngine;
 
 namespace Eu4ng.Framework.OutGame
 {
+    /// <summary>
+    /// UI Manager 클래스의 컴포넌트 클래스입니다.
+    /// Alert, Confirm, Prompt 등의 모달 창을 관리합니다.
+    /// </summary>
     public class ModalManager : MonoBehaviour, IModalManager
     {
         /* Properties */
-        
+
         OutGameFrameworkSettings Settings => OutGameFrameworkSettings.Instance;
-        IUIManager UIManagerInterface => GlobalUIManager.Instance;
+        IUIManager UIManagerInterface => UIManager.Instance;
 
         /* IModalManager */
 
