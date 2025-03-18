@@ -64,7 +64,7 @@ namespace Eu4ng.Framework.OutGame
             var operation = SceneManager.LoadSceneAsync(buildIndex);
             operation.allowSceneActivation = false;
 
-            while (!operation.isDone)
+            while (!Mathf.Approximately(operation.progress, 0.9f))
             {
                 loadingWidgetInterface.UpdateLoadingProgress(operation.progress / 0.9f);
 
