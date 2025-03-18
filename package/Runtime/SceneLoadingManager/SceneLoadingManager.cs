@@ -51,12 +51,16 @@ namespace Eu4ng.Framework.OutGame
 
         protected virtual IEnumerator LoadSceneCoroutine(int buildIndex, ILoadingWidget loadingWidgetInterface)
         {
+            // 페이드 아웃
             loadingWidgetInterface.HideLoadingScreen();
             loadingWidgetInterface.FadeOut(m_FadeTime);
             yield return new WaitForSeconds(m_FadeTime);
+
+            // 로딩창 표시
             loadingWidgetInterface.UpdateLoadingState("Loading");
             loadingWidgetInterface.ShowLoadingScreen();
 
+            // 로딩 시작
             var operation = SceneManager.LoadSceneAsync(buildIndex);
             operation.allowSceneActivation = false;
 
@@ -67,9 +71,17 @@ namespace Eu4ng.Framework.OutGame
                 yield return null;
             }
 
+            // 로딩 완료
             loadingWidgetInterface.UpdateLoadingState("Complete");
+
+            // 고정 로딩 시간동안 대기
             yield return new WaitForSeconds(m_MinimumLoadingScreenDisplayTime);
+
+            // 씬 전환
             loadingWidgetInterface.HideLoadingScreen();
+            operation.allowSceneActivation = true;
+
+            // 페이드 인
             loadingWidgetInterface.FadeIn(m_FadeTime);
             yield return new WaitForSeconds(m_FadeTime);
         }
