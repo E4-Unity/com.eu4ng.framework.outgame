@@ -24,7 +24,7 @@ namespace Eu4ng.Framework.OutGame
 
             UIManagerInterface.ShowWidget(widgetPrefab);
 
-            IModalWidget modalWidgetInterface = UIManagerInterface.GetWidgetInstance(widgetPrefab).GetComponent<IModalWidget>();
+            IModalWidget modalWidgetInterface = UIManagerInterface.GetWidget(widgetPrefab).GetComponent<IModalWidget>();
             modalWidgetInterface.RequestData = requestData;
         }
 

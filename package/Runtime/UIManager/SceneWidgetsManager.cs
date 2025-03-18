@@ -32,7 +32,7 @@ namespace Eu4ng.Framework.OutGame
             foreach (var globalStartupWidgetPrefab in Settings.GlobalStartupWidgetPrefabs)
             {
                 UIManagerInterface.ShowWidget(globalStartupWidgetPrefab);
-                var globalStartupWidget = UIManagerInterface.GetWidgetInstance(globalStartupWidgetPrefab);
+                var globalStartupWidget = UIManagerInterface.GetWidget(globalStartupWidgetPrefab);
                 m_GlobalStartupWidgets.Add(globalStartupWidget);
             }
         }
@@ -61,7 +61,7 @@ namespace Eu4ng.Framework.OutGame
             foreach (var sceneStartupWidgetPrefab in sceneStartupWidgetPrefabs)
             {
                 UIManagerInterface.ShowWidget(sceneStartupWidgetPrefab);
-                var sceneStartupWidget = UIManagerInterface.GetWidgetInstance(sceneStartupWidgetPrefab);
+                var sceneStartupWidget = UIManagerInterface.GetWidget(sceneStartupWidgetPrefab);
                 m_SceneStartupWidgets.Add(sceneStartupWidget);
             }
         }

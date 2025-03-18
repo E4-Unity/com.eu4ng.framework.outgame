@@ -29,7 +29,7 @@ namespace Eu4ng.Framework.OutGame
 
         /* IUIManager */
 
-        public RectTransform GetWidgetInstance(RectTransform widgetPrefab)
+        public RectTransform GetWidget(RectTransform widgetPrefab)
         {
             m_WidgetDictionary.TryGetValue(widgetPrefab, out var widgetInstance);
 
