@@ -10,8 +10,8 @@ namespace Eu4ng.Framework.OutGame
     {
         /* Fields */
         [Header("Config")]
-        [SerializeField] float m_MinimumLoadingScreenDisplayTime = 1.0f;
-        [SerializeField] float m_FadeTime = 1.0f;
+        [SerializeField] float m_MinimumLoadingScreenDisplayTime = 2.0f;
+        [SerializeField] float m_FadeTime = 2.0f;
 
         /* Properties */
 
@@ -57,6 +57,7 @@ namespace Eu4ng.Framework.OutGame
             yield return new WaitForSeconds(m_FadeTime);
 
             // 로딩창 표시
+            loadingWidgetInterface.UpdateLoadingProgress(0);
             loadingWidgetInterface.UpdateLoadingState("Loading");
             loadingWidgetInterface.ShowLoadingScreen();
 
@@ -72,6 +73,7 @@ namespace Eu4ng.Framework.OutGame
             }
 
             // 로딩 완료
+            loadingWidgetInterface.UpdateLoadingProgress(1);
             loadingWidgetInterface.UpdateLoadingState("Complete");
 
             // 고정 로딩 시간동안 대기
@@ -80,6 +82,10 @@ namespace Eu4ng.Framework.OutGame
             // 씬 전환
             loadingWidgetInterface.HideLoadingScreen();
             operation.allowSceneActivation = true;
+            while (!operation.isDone)
+            {
+                yield return null;
+            }
 
             // 페이드 인
             loadingWidgetInterface.FadeIn(m_FadeTime);

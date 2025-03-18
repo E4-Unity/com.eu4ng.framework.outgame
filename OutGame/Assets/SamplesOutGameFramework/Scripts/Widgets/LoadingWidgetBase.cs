@@ -14,14 +14,14 @@ namespace Eu4ng.Framework.OutGame.Sample
         [SerializeField] TextMeshProUGUI m_LoadingPercentageText;
         [SerializeField] Slider m_LoadingPercentageSlider;
 
-        float m_LoadingProgress;
+        float m_LoadingProgress = -1;
 
         /* ILoadingWidget */
         public virtual void FadeOut(float duration)
         {
             LogOutGameFramework.Log("Start FadeOut");
             var originalColor = m_FadingImage.color;
-            m_FadingImage.color = new Color(originalColor.r, originalColor.g, originalColor.b, 0);
+            m_FadingImage.CrossFadeAlpha(0, 0, true);
             m_FadingImage.CrossFadeAlpha(1, duration, true);
         }
 
@@ -29,7 +29,7 @@ namespace Eu4ng.Framework.OutGame.Sample
         {
             LogOutGameFramework.Log("Start FadeIn");
             var originalColor = m_FadingImage.color;
-            m_FadingImage.color = new Color(originalColor.r, originalColor.g, originalColor.b, 1);
+            m_FadingImage.CrossFadeAlpha(0, 1, true);
             m_FadingImage.CrossFadeAlpha(0, duration, true);
         }
 
@@ -41,6 +41,8 @@ namespace Eu4ng.Framework.OutGame.Sample
         {
             if (Mathf.Approximately(m_LoadingProgress, progress)) return;
             m_LoadingProgress = progress;
+
+            LogOutGameFramework.Log("LoadingProgress: " + m_LoadingProgress);
 
             // Update LoadingPercentageSlider
             if (m_LoadingPercentageSlider != null)
