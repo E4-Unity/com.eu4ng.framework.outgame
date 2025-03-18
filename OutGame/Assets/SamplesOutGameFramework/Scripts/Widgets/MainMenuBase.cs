@@ -1,9 +1,8 @@
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-namespace Eu4ng.Framework.OutGame
+namespace Eu4ng.Framework.OutGame.Sample
 {
     /// <summary>
     /// 일반적인 게임들의 메인 메뉴 위젯 클래스입니다.
@@ -16,9 +15,7 @@ namespace Eu4ng.Framework.OutGame
         [SerializeField] protected Button m_ExitButton;
 
         [Header("Config")]
-        [SerializeField] protected bool m_UseSceneIndex = true;
-        [SerializeField] protected int m_MainSceneIndex = 1;
-        [SerializeField] protected string m_MainSceneName = "Main";
+        [SerializeField] SampleSceneType m_MainScene = SampleSceneType.Main;
 
         /* MonoBehaviour */
 
@@ -61,14 +58,7 @@ namespace Eu4ng.Framework.OutGame
 
         protected virtual void OpenMainScene()
         {
-            if (m_UseSceneIndex)
-            {
-                SceneManager.LoadScene(m_MainSceneIndex);
-            }
-            else
-            {
-                SceneManager.LoadScene(m_MainSceneName);
-            }
+            SceneLoadingManager.Instance.LoadScene(m_MainScene);
         }
     }
 }

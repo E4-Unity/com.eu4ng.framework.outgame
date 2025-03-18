@@ -18,6 +18,7 @@ namespace Eu4ng.Framework.OutGame
         const string LOG_CATEGORY = nameof(LogOutGameFramework);
         const string LOG_PREFIX = LOG_CATEGORY + ": ";
 
+        // ReSharper disable Unity.PerformanceAnalysis
         public static void Log(object message)
         {
             Debug.Log(LOG_PREFIX + message);

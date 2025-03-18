@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Eu4ng.Framework.OutGame
+namespace Eu4ng.Framework.OutGame.Sample
 {
     public class OptionsMenuBase : UserWidget
     {
