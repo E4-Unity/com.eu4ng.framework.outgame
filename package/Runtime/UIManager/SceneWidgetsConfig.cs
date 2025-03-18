@@ -9,11 +9,11 @@ namespace Eu4ng.Framework.OutGame
     /// </summary>
     public abstract class SceneWidgetsConfig : ScriptableObject
     {
-        [SerializeField] List<RectTransform> m_StartupWidgets;
+        [SerializeField] List<RectTransform> m_StartupWidgetPrefabs;
 
         public abstract int BuildIndex { get; }
 
-        public List<RectTransform> StartupWidgets => m_StartupWidgets;
+        public List<RectTransform> StartupWidgetPrefabs => m_StartupWidgetPrefabs;
     }
 
     public abstract class SceneWidgetsConfig<T> : SceneWidgetsConfig where T : struct, IConvertible

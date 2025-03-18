@@ -12,8 +12,8 @@ namespace Eu4ng.Framework.OutGame
     public class SceneWidgetsManager : MonoBehaviour
     {
         [Header("State")]
-        [SerializeField, ReadOnly] List<RectTransform> m_GlobalWidgets = new List<RectTransform>();
-        [SerializeField, ReadOnly] List<RectTransform> m_SceneWidgets = new List<RectTransform>();
+        [SerializeField, ReadOnly] List<RectTransform> m_GlobalStartupWidgets = new List<RectTransform>();
+        [SerializeField, ReadOnly] List<RectTransform> m_SceneStartupWidgets = new List<RectTransform>();
 
         OutGameFrameworkSettings Settings => OutGameFrameworkSettings.Instance;
         IUIManager UIManagerInterface => UIManager.Instance;
@@ -27,13 +27,13 @@ namespace Eu4ng.Framework.OutGame
 
         protected virtual void CreateGlobalWidgets()
         {
-            if (m_GlobalWidgets.Count > 0) return;
+            if (m_GlobalStartupWidgets.Count > 0) return;
 
-            foreach (var globalWidgetPrefab in Settings.GlobalWidgetPrefabs)
+            foreach (var globalStartupWidgetPrefab in Settings.GlobalStartupWidgetPrefabs)
             {
-                UIManagerInterface.ShowWidget(globalWidgetPrefab);
-                var globalWidget = UIManagerInterface.GetWidgetInstance(globalWidgetPrefab);
-                m_GlobalWidgets.Add(globalWidget);
+                UIManagerInterface.ShowWidget(globalStartupWidgetPrefab);
+                var globalStartupWidget = UIManagerInterface.GetWidgetInstance(globalStartupWidgetPrefab);
+                m_GlobalStartupWidgets.Add(globalStartupWidget);
             }
         }
 
@@ -46,23 +46,23 @@ namespace Eu4ng.Framework.OutGame
 
         protected virtual void DestroySceneWidgets()
         {
-            foreach (var sceneWidget in m_SceneWidgets)
+            foreach (var sceneWidget in m_SceneStartupWidgets)
             {
                 IUserWidget userWidgetInterface = sceneWidget.GetComponent<IUserWidget>();
                 userWidgetInterface?.Remove();
             }
 
-            m_SceneWidgets.Clear();
+            m_SceneStartupWidgets.Clear();
         }
 
         protected virtual void CreateSceneWidgets(int buildIndex)
         {
-            var sceneWidgetPrefabs = Settings.GetStartupWidgets(buildIndex);
-            foreach (var sceneWidgetPrefab in sceneWidgetPrefabs)
+            var sceneStartupWidgetPrefabs = Settings.GetSceneStartupWidgetPrefabs(buildIndex);
+            foreach (var sceneStartupWidgetPrefab in sceneStartupWidgetPrefabs)
             {
-                UIManagerInterface.ShowWidget(sceneWidgetPrefab);
-                var globalWidget = UIManagerInterface.GetWidgetInstance(sceneWidgetPrefab);
-                m_SceneWidgets.Add(globalWidget);
+                UIManagerInterface.ShowWidget(sceneStartupWidgetPrefab);
+                var sceneStartupWidget = UIManagerInterface.GetWidgetInstance(sceneStartupWidgetPrefab);
+                m_SceneStartupWidgets.Add(sceneStartupWidget);
             }
         }
     }

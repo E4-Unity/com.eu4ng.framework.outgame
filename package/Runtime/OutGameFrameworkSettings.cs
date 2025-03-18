@@ -20,7 +20,7 @@ namespace Eu4ng.Framework.OutGame
         [SerializeField] RectTransform m_PromptWidgetPrefab;
 
         [Header("Scene Widgets Manager")]
-        [SerializeField] List<RectTransform> m_GlobalWidgetPrefabs;
+        [SerializeField] List<RectTransform> m_GlobalStartupWidgetPrefabs;
         [SerializeReference] List<SceneWidgetsConfig> m_SceneWidgetsConfigList;
 
         readonly Dictionary<int, List<RectTransform>> m_SceneWidgetsDictionary = new Dictionary<int, List<RectTransform>>();
@@ -35,8 +35,8 @@ namespace Eu4ng.Framework.OutGame
         public RectTransform PromptWidgetPrefab => m_PromptWidgetPrefab;
 
         // Scene Widgets Manager
-        public List<RectTransform> GlobalWidgetPrefabs => m_GlobalWidgetPrefabs;
-        public List<RectTransform> GetStartupWidgets(int buildIndex) => m_SceneWidgetsDictionary.GetValueOrDefault(buildIndex, new List<RectTransform>());
+        public List<RectTransform> GlobalStartupWidgetPrefabs => m_GlobalStartupWidgetPrefabs;
+        public List<RectTransform> GetSceneStartupWidgetPrefabs(int buildIndex) => m_SceneWidgetsDictionary.GetValueOrDefault(buildIndex, new List<RectTransform>());
 
         /* DeveloperSettings */
 
@@ -46,7 +46,7 @@ namespace Eu4ng.Framework.OutGame
             {
                 if (sceneWidgetsConfig != null)
                 {
-                    m_SceneWidgetsDictionary.TryAdd(sceneWidgetsConfig.BuildIndex, sceneWidgetsConfig.StartupWidgets);
+                    m_SceneWidgetsDictionary.TryAdd(sceneWidgetsConfig.BuildIndex, sceneWidgetsConfig.StartupWidgetPrefabs);
                 }
             }
         }
