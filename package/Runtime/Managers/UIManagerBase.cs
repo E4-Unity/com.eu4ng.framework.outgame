@@ -6,12 +6,13 @@ using Eu4ng.Utilities;
 
 namespace Eu4ng.Framework.OutGame
 {
-    [RequireComponent(typeof(DynamicWidgetManager))]
+    [RequireComponent(typeof(DynamicWidgetManager), typeof(SceneWidgetsManager))]
     public abstract class UIManagerBase<T> : MonoSingleton<T>, IUIManager where T : UIManagerBase<T>
     {
         /* Components */
 
         [SerializeField, ReadOnly] DynamicWidgetManager m_DynamicWidgetManager;
+        [SerializeField, ReadOnly] SceneWidgetsManager m_SceneWidgetsManager;
 
         IUIManager UIManagerInterface => m_DynamicWidgetManager;
 
@@ -35,6 +36,7 @@ namespace Eu4ng.Framework.OutGame
         protected override void OnInitialize()
         {
             m_DynamicWidgetManager = GetComponent<DynamicWidgetManager>();
+            m_SceneWidgetsManager = GetComponent<SceneWidgetsManager>();
         }
 
         /* MonoBehaviour */
