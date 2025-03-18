@@ -3,6 +3,10 @@ using UnityEngine;
 
 namespace Eu4ng.Framework.OutGame
 {
+    /// <summary>
+    /// UI Manager 클래스의 컴포넌트 클래스입니다.
+    /// 동적 UI 생성 및 파괴를 담당합니다.
+    /// </summary>
     public class DynamicWidgetManager : MonoBehaviour, IUIManager
     {
         /* Fields */
