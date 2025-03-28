@@ -9,7 +9,7 @@ namespace Eu4ng.Framework.OutGame
     {
         [SerializeField] RectTransform m_WidgetPrefab;
 
-        protected RectTransform WidgetPrefab => m_WidgetPrefab;
+        protected RectTransform WidgetPrefab => m_WidgetPrefab == null ? null : m_WidgetPrefab.GetComponent<IUserWidget>()?.Prefab;
 
         protected override void OnButtonClicked()
         {
