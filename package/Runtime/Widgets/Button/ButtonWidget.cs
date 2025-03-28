@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 namespace Eu4ng.Framework.OutGame
 {
-    public abstract class ButtonWidgetBase : UserWidget
+    public abstract class ButtonWidget : UserWidget
     {
         /* Fields */
 
@@ -13,7 +13,7 @@ namespace Eu4ng.Framework.OutGame
 
         protected Button GetButton() => m_Button;
 
-        /* ButtonWidgetBase */
+        /* ButtonWidget */
 
         protected virtual void OnButtonClicked()
         {

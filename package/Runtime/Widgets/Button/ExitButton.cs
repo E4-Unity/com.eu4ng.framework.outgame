@@ -2,9 +2,9 @@ using UnityEngine;
 
 namespace Eu4ng.Framework.OutGame
 {
-    public class ExitButton : ButtonWidgetBase
+    public class ExitButton : ButtonWidget
     {
-        /* ButtonWidgetBase */
+        /* ButtonWidget */
 
         protected override void OnButtonClicked()
         {
