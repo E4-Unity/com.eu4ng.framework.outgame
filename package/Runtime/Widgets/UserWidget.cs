@@ -48,6 +48,8 @@ namespace Eu4ng.Framework.OutGame
 
         public void HideWidget(RectTransform widgetPrefab) => UIManagerInterface.HideWidget(widgetPrefab);
 
+        public void ToggleWidget(RectTransform widgetPrefab) => UIManagerInterface.ToggleWidget(widgetPrefab);
+
         public void RemoveWidget(RectTransform widgetPrefab) => UIManagerInterface.RemoveWidget(widgetPrefab);
 
         /* IModalManager */

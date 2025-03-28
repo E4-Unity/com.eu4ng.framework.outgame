@@ -84,6 +84,21 @@ namespace Eu4ng.Framework.OutGame
             }
         }
 
+        public void ToggleWidget(RectTransform widgetPrefab)
+        {
+            // 유효성 검사
+            if (widgetPrefab == null) return;
+            
+            if (!m_WidgetDictionary.TryGetValue(widgetPrefab, out var widgetInstance) || !widgetInstance.gameObject.activeSelf)
+            {
+                ShowWidget(widgetPrefab);
+            }
+            else
+            {
+                HideWidget(widgetPrefab);
+            }
+        }
+
         public virtual void RemoveWidget(RectTransform widgetPrefab)
         {
             // 유효성 검사
