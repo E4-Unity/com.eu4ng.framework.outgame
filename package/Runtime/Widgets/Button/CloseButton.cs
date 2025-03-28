@@ -7,9 +7,9 @@ namespace Eu4ng.Framework.OutGame
     /// </summary>
     public class CloseButton : ButtonWidget
     {
-        [SerializeField] RectTransform m_WidgetPrefab;
+        [SerializeField] RectTransform m_RootWidget;
 
-        protected RectTransform WidgetPrefab => m_WidgetPrefab == null ? null : m_WidgetPrefab.GetComponent<IUserWidget>()?.Prefab;
+        protected RectTransform WidgetPrefab => m_RootWidget == null ? null : m_RootWidget.GetComponent<IUserWidget>()?.Prefab;
 
         protected override void OnButtonClicked()
         {
