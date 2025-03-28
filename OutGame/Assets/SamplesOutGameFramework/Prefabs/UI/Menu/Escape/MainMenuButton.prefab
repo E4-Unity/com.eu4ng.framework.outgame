@@ -90,11 +90,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4768073567133952751, guid: bc44127a8e247a74c8f6399ea5d3f8f7, type: 3}
       propertyPath: m_Name
-      value: ResumeButton
+      value: MainMenuButton
       objectReference: {fileID: 0}
     - target: {fileID: 8266031860536462930, guid: bc44127a8e247a74c8f6399ea5d3f8f7, type: 3}
       propertyPath: m_text
-      value: Resume
+      value: Main Menu
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -102,14 +102,14 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 4768073567133952751, guid: bc44127a8e247a74c8f6399ea5d3f8f7, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 794012603061002219}
+      addedObject: {fileID: 6705150604578545354}
   m_SourcePrefab: {fileID: 100100000, guid: bc44127a8e247a74c8f6399ea5d3f8f7, type: 3}
 --- !u!1 &2887253656227531909 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4768073567133952751, guid: bc44127a8e247a74c8f6399ea5d3f8f7, type: 3}
   m_PrefabInstance: {fileID: 7654443997297976938}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &794012603061002219
+--- !u!114 &6705150604578545354
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -118,12 +118,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2887253656227531909}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db85bef0be7a89a48bb879e2469c8755, type: 3}
+  m_Script: {fileID: 11500000, guid: 56e6c0a539c556943b32d53fb7021ad5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   <IsGlobalWidget>k__BackingField: 0
   m_Button: {fileID: 4298977707449495770}
-  m_WidgetPrefab: {fileID: 7650946560657818344, guid: 072bd89010e372941a2fe4727493152e, type: 3}
+  m_TargetScene: 0
 --- !u!114 &4298977707449495770 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5878047642797774512, guid: bc44127a8e247a74c8f6399ea5d3f8f7, type: 3}
