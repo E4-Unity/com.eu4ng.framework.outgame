@@ -5,9 +5,17 @@
       "depth": 0,
       "source": "local",
       "dependencies": {
+        "com.eu4ng.manager.input": "https://github.com/E4-Unity/com.eu4ng.manager.input.git?path=/package#v0.1.0",
         "com.eu4ng.manager.singleton": "https://github.com/E4-Unity/com.eu4ng.manager.singleton.git?path=/package#v0.1.0",
         "com.eu4ng.utilities": "https://github.com/E4-Unity/com.eu4ng.utilities.git?path=/package#v0.1.0"
       }
+    },
+    "com.eu4ng.manager.input": {
+      "version": "https://github.com/E4-Unity/com.eu4ng.manager.input.git?path=/package#v0.1.0",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "3f962f3775589ebc4be2ff1e254d84801fc5b3de"
     },
     "com.eu4ng.manager.singleton": {
       "version": "https://github.com/E4-Unity/com.eu4ng.manager.singleton.git?path=/package#v0.1.0",
