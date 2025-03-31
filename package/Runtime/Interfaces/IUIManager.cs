@@ -10,6 +10,8 @@ namespace Eu4ng.Framework.OutGame
 
         public void HideWidget(RectTransform widgetPrefab);
 
+        public void ToggleWidget(RectTransform widgetPrefab);
+
         public void RemoveWidget(RectTransform widgetPrefab);
     }
 }

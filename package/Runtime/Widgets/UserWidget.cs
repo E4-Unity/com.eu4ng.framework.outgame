@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Eu4ng.Framework.OutGame
@@ -15,6 +16,12 @@ namespace Eu4ng.Framework.OutGame
         protected virtual IModalManager ModalManagerInterface => UIManager.Instance;
 
         protected virtual void Refresh() { }
+
+        protected virtual void AssignReferences() { }
+
+        protected virtual void BindEvents() { }
+
+        protected virtual void UnbindEvents() { }
 
         /* IUserWidget */
 
@@ -41,6 +48,8 @@ namespace Eu4ng.Framework.OutGame
 
         public void HideWidget(RectTransform widgetPrefab) => UIManagerInterface.HideWidget(widgetPrefab);
 
+        public void ToggleWidget(RectTransform widgetPrefab) => UIManagerInterface.ToggleWidget(widgetPrefab);
+
         public void RemoveWidget(RectTransform widgetPrefab) => UIManagerInterface.RemoveWidget(widgetPrefab);
 
         /* IModalManager */
@@ -52,9 +61,17 @@ namespace Eu4ng.Framework.OutGame
         public void RequestPrompt(in ModalRequestData requestData, RectTransform widgetPrefab = null) => ModalManagerInterface.RequestPrompt(requestData, widgetPrefab);
 
         /* MonoBehaviour */
-        protected virtual void Awake() {}
+        protected virtual void Awake()
+        {
+            AssignReferences();
 
-        protected virtual void OnEnable() {}
+            BindEvents();
+        }
+
+        protected virtual void OnEnable()
+        {
+            Refresh();
+        }
 
         protected virtual void Start() {}
 
@@ -66,6 +83,16 @@ namespace Eu4ng.Framework.OutGame
 
         protected virtual void OnDisable() {}
 
-        protected virtual void OnDestroy() {}
+        protected virtual void OnDestroy()
+        {
+            UnbindEvents();
+        }
+
+#if UNITY_EDITOR
+        protected void OnValidate()
+        {
+            AssignReferences();
+        }
+#endif
     }
 }
