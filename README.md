@@ -10,7 +10,7 @@
 `OutGameFramework`
 
 ```
-https://github.com/E4-Unity/com.eu4ng.framework.outgame.git?path=/package#v0.1.0
+https://github.com/E4-Unity/com.eu4ng.framework.outgame.git?path=/package#v0.1.1
 ```
 
 ## 패키지 종속성
@@ -27,10 +27,17 @@ https://github.com/E4-Unity/com.eu4ng.utilities.git?path=/package#v0.1.0
 https://github.com/E4-Unity/com.eu4ng.manager.singleton.git?path=/package#v0.1.0
 ```
 
+[`Input Manager`](https://github.com/E4-Unity/com.eu4ng.manager.input)
+
+```
+https://github.com/E4-Unity/com.eu4ng.manager.input.git?path=/package#v0.1.0
+```
+
 ## manifest.json
 
 ```json
 "com.eu4ng.utilities": "https://github.com/E4-Unity/com.eu4ng.utilities.git?path=/package#v0.1.0",
 "com.eu4ng.manager.singleton": "https://github.com/E4-Unity/com.eu4ng.manager.singleton.git?path=/package#v0.1.0",
+"com.eu4ng.manager.input": "https://github.com/E4-Unity/com.eu4ng.manager.input.git?path=/package#v0.1.0",
 "com.eu4ng.framework.outgame": "https://github.com/E4-Unity/com.eu4ng.framework.outgame.git?path=/package#v0.1.0",
 ```
