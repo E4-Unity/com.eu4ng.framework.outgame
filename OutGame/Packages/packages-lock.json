@@ -6,8 +6,8 @@
       "source": "local",
       "dependencies": {
         "com.eu4ng.manager.input": "https://github.com/E4-Unity/com.eu4ng.manager.input.git?path=/package#v0.1.0",
-        "com.eu4ng.manager.singleton": "https://github.com/E4-Unity/com.eu4ng.manager.singleton.git?path=/package#v0.1.0",
-        "com.eu4ng.utilities": "https://github.com/E4-Unity/com.eu4ng.utilities.git?path=/package#v0.1.0"
+        "com.eu4ng.manager.singleton": "https://github.com/E4-Unity/com.eu4ng.manager.singleton.git?path=/package#v0.2.0",
+        "com.eu4ng.utilities": "https://github.com/E4-Unity/com.eu4ng.utilities.git?path=/package#v0.1.1"
       }
     },
     "com.eu4ng.manager.input": {
@@ -18,18 +18,20 @@
       "hash": "3f962f3775589ebc4be2ff1e254d84801fc5b3de"
     },
     "com.eu4ng.manager.singleton": {
-      "version": "https://github.com/E4-Unity/com.eu4ng.manager.singleton.git?path=/package#v0.1.0",
+      "version": "https://github.com/E4-Unity/com.eu4ng.manager.singleton.git?path=/package#v0.2.0",
       "depth": 0,
       "source": "git",
-      "dependencies": {},
-      "hash": "9f60c230f3c4fac95b3c244bd53666624b205a6f"
+      "dependencies": {
+        "com.eu4ng.utilities": "https://github.com/E4-Unity/com.eu4ng.utilities.git?path=/package#v0.1.1"
+      },
+      "hash": "11c5ed2dd02910cf762f042d2d1c1b45d2eb0719"
     },
     "com.eu4ng.utilities": {
-      "version": "https://github.com/E4-Unity/com.eu4ng.utilities.git?path=/package#v0.1.0",
+      "version": "https://github.com/E4-Unity/com.eu4ng.utilities.git?path=/package#v0.1.1",
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "ecbb50064bd83a7b07c7511cadf3bfb56d3e4a22"
+      "hash": "63e3b96f0f3b41d8e9fc33cd39519f200e784bfe"
     },
     "com.unity.2d.animation": {
       "version": "10.1.4",
