@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 using Eu4ng.Manager.Singleton;
@@ -6,6 +7,15 @@ using UnityEngine.EventSystems;
 
 namespace Eu4ng.Framework.OutGame
 {
+    [Serializable]
+    public struct UIManagerSettings
+    {
+        [field: SerializeField] public Canvas CanvasPrefab { get; private set; }
+        [field: SerializeField] public EventSystem EventSystemPrefab { get; private set; }
+
+        public static UIManagerSettings Instance => OutGameFrameworkSettings.Instance.UIManagerSettings;
+    }
+
     [RequireComponent(typeof(DynamicWidgetManager), typeof(ModalManager), typeof(SceneWidgetsManager))]
     public class UIManager : GameSubsystem<UIManager>, IUIManager, IModalManager
     {

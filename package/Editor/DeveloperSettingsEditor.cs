@@ -5,7 +5,7 @@ namespace Eu4ng.Framework.OutGame.Editor
 {
     internal static class DeveloperSettingsEditor
     {
-        [MenuItem("Tools/DeveloperSettings/Generate/UIManagerSettings")]
-        static void GenerateUIManagerSettings() => DeveloperSettings.CreateDeveloperSettings(typeof(UIManagerSettings));
+        [MenuItem("Tools/DeveloperSettings/Generate/OutGameFrameworkSettings")]
+        static void GenerateOutGameFrameworkSettings() => DeveloperSettings.CreateDeveloperSettings(typeof(OutGameFrameworkSettings));
     }
 }

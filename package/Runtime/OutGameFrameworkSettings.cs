@@ -11,6 +11,8 @@ namespace Eu4ng.Framework.OutGame
     {
         /* Fields */
 
+        [field: SerializeField] public UIManagerSettings UIManagerSettings { get; private set; }
+
         [Header("Config")]
         [SerializeField] RectTransform m_OptionsWidget;
 
