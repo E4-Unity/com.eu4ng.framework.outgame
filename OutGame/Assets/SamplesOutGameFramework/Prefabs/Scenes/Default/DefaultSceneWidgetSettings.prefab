@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4327336792410304073}
   - component: {fileID: 9202346841105575596}
   m_Layer: 0
-  m_Name: SceneWidgetSettings
+  m_Name: DefaultSceneWidgetSettings
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
