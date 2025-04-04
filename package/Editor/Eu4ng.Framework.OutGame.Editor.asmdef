@@ -2,7 +2,8 @@
     "name": "Eu4ng.Framework.OutGame.Editor",
     "rootNamespace": "Eu4ng.Framework.OutGame.Editor",
     "references": [
-        "GUID:01fd9bb70fa9e6b43915abd56be24d29"
+        "GUID:01fd9bb70fa9e6b43915abd56be24d29",
+        "GUID:c2becb15332ef2145b3d7c2149f8e3cb"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
