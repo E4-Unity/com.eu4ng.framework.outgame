@@ -17,7 +17,7 @@ namespace Eu4ng.Framework.OutGame
         Done
     }
 
-    public class SceneLoadingManager : MonoSingleton<SceneLoadingManager>
+    public class SceneLoadingManager : GameSubsystem<SceneLoadingManager>
     {
         /* Fields */
 
