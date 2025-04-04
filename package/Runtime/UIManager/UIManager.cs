@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 using Eu4ng.Manager.Singleton;
@@ -9,13 +8,13 @@ namespace Eu4ng.Framework.OutGame
     [RequireComponent(typeof(DynamicWidgetManager), typeof(ModalManager), typeof(SceneWidgetsManager))]
     public class UIManager : MonoSingleton<UIManager>, IUIManager, IModalManager
     {
-        [Header("Components")]
-        [SerializeField, ReadOnly] DynamicWidgetManager m_DynamicWidgetManager;
-        [SerializeField, ReadOnly] ModalManager m_ModalManager;
-        [SerializeField, ReadOnly] SceneWidgetsManager m_SceneWidgetsManager;
+        [field: Header("Components")]
+        [field: SerializeField, ReadOnly] public DynamicWidgetManager DynamicWidgetManager { get; private set; }
+        [field: SerializeField, ReadOnly] public ModalManager ModalManager { get; private set; }
+        [field: SerializeField, ReadOnly] public SceneWidgetsManager SceneWidgetsManager { get; private set; }
 
-        IUIManager UIManagerInterface => m_DynamicWidgetManager;
-        IModalManager ModalManagerInterface => m_ModalManager;
+        IUIManager UIManagerInterface => DynamicWidgetManager;
+        IModalManager ModalManagerInterface => ModalManager;
 
         /* IUIManager */
 
@@ -41,9 +40,9 @@ namespace Eu4ng.Framework.OutGame
 
         protected override void OnInitialize()
         {
-            m_DynamicWidgetManager = GetComponent<DynamicWidgetManager>();
-            m_ModalManager = GetComponent<ModalManager>();
-            m_SceneWidgetsManager = GetComponent<SceneWidgetsManager>();
+            DynamicWidgetManager = GetComponent<DynamicWidgetManager>();
+            ModalManager = GetComponent<ModalManager>();
+            SceneWidgetsManager = GetComponent<SceneWidgetsManager>();
         }
     }
 }
