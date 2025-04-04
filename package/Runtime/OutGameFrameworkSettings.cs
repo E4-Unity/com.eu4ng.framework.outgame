@@ -21,9 +21,6 @@ namespace Eu4ng.Framework.OutGame
 
         [Header("Scene Widgets Manager")]
         [SerializeField] List<RectTransform> m_GlobalStartupWidgetPrefabs;
-        [SerializeReference] List<SceneWidgetsConfig> m_SceneWidgetsConfigList;
-
-        readonly Dictionary<int, List<RectTransform>> m_SceneWidgetsDictionary = new Dictionary<int, List<RectTransform>>();
 
         [Header("Scene Loading Manager")]
         [SerializeField] RectTransform m_LoadingWidgetPrefab;
@@ -39,22 +36,12 @@ namespace Eu4ng.Framework.OutGame
 
         // Scene Widgets Manager
         public List<RectTransform> GlobalStartupWidgetPrefabs => m_GlobalStartupWidgetPrefabs;
-        public List<RectTransform> GetSceneStartupWidgetPrefabs(int buildIndex) => m_SceneWidgetsDictionary.GetValueOrDefault(buildIndex, new List<RectTransform>());
 
         // Scene Loading Manager
         public RectTransform LoadingWidgetPrefab => m_LoadingWidgetPrefab;
 
         /* DeveloperSettings */
 
-        protected override void OnInitialize()
-        {
-            foreach (var sceneWidgetsConfig in m_SceneWidgetsConfigList)
-            {
-                if (sceneWidgetsConfig != null)
-                {
-                    m_SceneWidgetsDictionary.TryAdd(sceneWidgetsConfig.BuildIndex, sceneWidgetsConfig.StartupWidgetPrefabs);
-                }
-            }
-        }
+        protected override void OnInitialize() {}
     }
 }

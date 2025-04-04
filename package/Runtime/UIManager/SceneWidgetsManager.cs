@@ -13,7 +13,6 @@ namespace Eu4ng.Framework.OutGame
     {
         [Header("State")]
         [SerializeField, ReadOnly] List<RectTransform> m_GlobalStartupWidgets = new List<RectTransform>();
-        [SerializeField, ReadOnly] List<RectTransform> m_SceneStartupWidgets = new List<RectTransform>();
 
         OutGameFrameworkSettings Settings => OutGameFrameworkSettings.Instance;
         IUIManager UIManagerInterface => UIManager.Instance;
@@ -21,8 +20,6 @@ namespace Eu4ng.Framework.OutGame
         protected virtual void Awake()
         {
             CreateGlobalWidgets();
-
-            SceneManager.activeSceneChanged += OnActiveSceneChanged;
         }
 
         protected virtual void CreateGlobalWidgets()
@@ -42,39 +39,6 @@ namespace Eu4ng.Framework.OutGame
                     widgetInstance.IsGlobalWidget = true;
 
                     LogOutGameFramework.LogWarning(globalStartupWidgetPrefab.name + " is not set as global widget. Force set widgetInstance as global widget.");
-                }
-            }
-        }
-
-        protected virtual void OnActiveSceneChanged(Scene currentScene, Scene nextScene)
-        {
-            DestroySceneWidgets();
-
-            CreateSceneWidgets(nextScene.buildIndex);
-        }
-
-        protected virtual void DestroySceneWidgets()
-        {
-            // DynamicWidgetManager에서 자동으로 제거되므로 m_SceneStartupWidgets 목록만 초기화
-            m_SceneStartupWidgets.Clear();
-        }
-
-        protected virtual void CreateSceneWidgets(int buildIndex)
-        {
-            var sceneStartupWidgetPrefabs = Settings.GetSceneStartupWidgetPrefabs(buildIndex);
-            foreach (var sceneStartupWidgetPrefab in sceneStartupWidgetPrefabs)
-            {
-                UIManagerInterface.ShowWidget(sceneStartupWidgetPrefab);
-                var sceneStartupWidget = UIManagerInterface.GetWidget(sceneStartupWidgetPrefab);
-                m_SceneStartupWidgets.Add(sceneStartupWidget);
-
-                // 위젯 프리팹 설정과 관계없이 위젯 인스턴스의 IsGlobalWidget를 false로 설정
-                var widgetInstance = sceneStartupWidget.GetComponent<WidgetInstance>();
-                if (widgetInstance.IsGlobalWidget)
-                {
-                    widgetInstance.IsGlobalWidget = false;
-
-                    LogOutGameFramework.LogWarning(sceneStartupWidget.name + " is set as global widget. Force set widgetInstance as scene widget.");
                 }
             }
         }
