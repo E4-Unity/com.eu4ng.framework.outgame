@@ -45,11 +45,12 @@ namespace Eu4ng.Framework.OutGame
 
         protected override void OnInitialize()
         {
+            SpawnCanvas();
+
             DynamicWidgetManager = GetComponent<DynamicWidgetManager>();
+            DynamicWidgetManager.GlobalCanvas = GlobalCanvas;
             ModalManager = GetComponent<ModalManager>();
             SceneWidgetsManager = GetComponent<SceneWidgetsManager>();
-
-            SpawnCanvas();
         }
 
         /* UIManager */

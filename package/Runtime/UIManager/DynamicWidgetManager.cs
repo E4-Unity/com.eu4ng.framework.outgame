@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Eu4ng.Utilities;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -12,20 +13,29 @@ namespace Eu4ng.Framework.OutGame
     {
         /* Fields */
 
-        [Header("References")]
-        [SerializeField] Canvas m_Canvas;
+        [Header("Dependencies")]
+        [SerializeField, ReadOnly] Canvas m_GlobalCanvas;
+
+        public Canvas GlobalCanvas
+        {
+            get => m_GlobalCanvas;
+            set
+            {
+                if (value is null) return;
+                if (m_GlobalCanvas is not null) return;
+                m_GlobalCanvas = value;
+            }
+        }
 
         /* Properties */
 
         protected Dictionary<RectTransform, RectTransform> WidgetDictionary { get; private set; } = new Dictionary<RectTransform, RectTransform>();
-        protected Transform CanvasTransform => m_Canvas?.transform;
+        protected Transform CanvasTransform => GlobalCanvas.transform;
 
         /* MonoBehaviour */
 
         protected virtual void Awake()
         {
-            if(m_Canvas == null) m_Canvas = GetComponentInChildren<Canvas>();
-
             SceneManager.activeSceneChanged += OnActiveSceneChanged;
         }
 
