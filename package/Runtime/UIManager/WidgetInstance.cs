@@ -18,6 +18,5 @@ namespace Eu4ng.Framework.OutGame
         }
         public void Show() => UIManager.Instance.ShowWidget(WidgetPrefab);
         public void Hide() => UIManager.Instance.HideWidget(WidgetPrefab);
-        public void Remove() => UIManager.Instance.RemoveWidget(WidgetPrefab);
     }
 }

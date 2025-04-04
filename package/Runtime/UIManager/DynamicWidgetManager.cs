@@ -121,13 +121,6 @@ namespace Eu4ng.Framework.OutGame
             if (!CanvasTransform) return null;
             if (widgetPrefab == null) return null;
 
-            // 인터페이스 검사
-            if (widgetPrefab.GetComponent<IUserWidget>() == null)
-            {
-                LogOutGameFramework.LogError(widgetPrefab.name + " should implement IUserWidget");
-                return null;
-            }
-
             // 중복 검사
             if (WidgetDictionary.TryGetValue(widgetPrefab, out var widgetInstance))
             {
@@ -148,16 +141,20 @@ namespace Eu4ng.Framework.OutGame
         protected virtual RectTransform CreateWidgetInstance(RectTransform widgetPrefab)
         {
             // 위젯 인스턴스 생성
-            bool cachedActiveSelf = widgetPrefab.gameObject.activeSelf;
+            var cachedActiveSelf = widgetPrefab.gameObject.activeSelf;
             widgetPrefab.gameObject.SetActive(false);
-            RectTransform widgetInstance = Instantiate(widgetPrefab, CanvasTransform);
+            var widget = Instantiate(widgetPrefab, CanvasTransform);
             widgetPrefab.gameObject.SetActive(cachedActiveSelf);
 
-            // 위젯 인스턴스 초기화
-            IUserWidget userWidget = widgetInstance.GetComponent<IUserWidget>();
-            userWidget.Prefab = widgetPrefab;
+            // UserWidget 컴포넌트 가져오기
+            var userWidget = widget.GetComponent<UserWidget>();
+            var isGlobalWidget = userWidget?.IsGlobalWidget ?? false;
 
-            return widgetInstance;
+            // WidgetInstance 컴포넌트 부착
+            var widgetInstance = widget.gameObject.AddComponent<WidgetInstance>();
+            widgetInstance.Initialize(widgetPrefab, isGlobalWidget);
+
+            return widget;
         }
 
         protected virtual void RemoveAllWidgets()
@@ -178,13 +175,10 @@ namespace Eu4ng.Framework.OutGame
         {
             // GlobalWidget으로 설정된 위젯들을 제외한 모든 위젯 가져오기
             List<RectTransform> widgetPrefabsToDestroy = new List<RectTransform>(WidgetDictionary.Count);
-            foreach (var pair in WidgetDictionary)
+            foreach (var (widgetPrefab, widget) in WidgetDictionary)
             {
-                var widgetPrefab = pair.Key;
-                var widget = pair.Value;
-
-                IUserWidget userWidget = widget.GetComponent<IUserWidget>();
-                if(userWidget.IsGlobalWidget) continue;
+                var widgetInstance = widget.GetComponent<WidgetInstance>();
+                if(widgetInstance.IsGlobalWidget) continue;
 
                 widgetPrefabsToDestroy.Add(widgetPrefab);
             }
