@@ -10,7 +10,7 @@ namespace Eu4ng.Framework.OutGame
     {
         /* Properties */
 
-        OutGameFrameworkSettings Settings => OutGameFrameworkSettings.Instance;
+        UIManagerSettings Settings => UIManagerSettings.Instance;
         IUIManager UIManagerInterface => UIManager.Instance;
 
         /* IModalManager */
