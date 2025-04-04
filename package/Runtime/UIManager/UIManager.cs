@@ -2,16 +2,21 @@ using UnityEngine;
 
 using Eu4ng.Manager.Singleton;
 using Eu4ng.Utilities;
+using UnityEngine.EventSystems;
 
 namespace Eu4ng.Framework.OutGame
 {
     [RequireComponent(typeof(DynamicWidgetManager), typeof(ModalManager), typeof(SceneWidgetsManager))]
-    public class UIManager : MonoSingleton<UIManager>, IUIManager, IModalManager
+    public class UIManager : GameSubsystem<UIManager>, IUIManager, IModalManager
     {
         [field: Header("Components")]
         [field: SerializeField, ReadOnly] public DynamicWidgetManager DynamicWidgetManager { get; private set; }
         [field: SerializeField, ReadOnly] public ModalManager ModalManager { get; private set; }
         [field: SerializeField, ReadOnly] public SceneWidgetsManager SceneWidgetsManager { get; private set; }
+
+        [field: Header("UI")]
+        [field: SerializeField, ReadOnly] public Canvas GlobalCanvas { get; private set; }
+        [field: SerializeField, ReadOnly] public EventSystem GlobalEventSystem { get; private set; }
 
         IUIManager UIManagerInterface => DynamicWidgetManager;
         IModalManager ModalManagerInterface => ModalManager;
@@ -43,6 +48,17 @@ namespace Eu4ng.Framework.OutGame
             DynamicWidgetManager = GetComponent<DynamicWidgetManager>();
             ModalManager = GetComponent<ModalManager>();
             SceneWidgetsManager = GetComponent<SceneWidgetsManager>();
+
+            SpawnCanvas();
+        }
+
+        /* UIManager */
+
+        void SpawnCanvas()
+        {
+            var settings = UIManagerSettings.Instance;
+            GlobalCanvas = Instantiate(settings.CanvasPrefab, transform);
+            GlobalEventSystem = Instantiate(settings.EventSystemPrefab, transform);
         }
     }
 }
