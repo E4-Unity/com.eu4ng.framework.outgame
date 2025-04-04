@@ -12,6 +12,7 @@ namespace Eu4ng.Framework.OutGame
         /* Fields */
 
         [field: SerializeField] public UIManagerSettings UIManagerSettings { get; private set; }
+        [field: SerializeField] public SceneLoadingManagerSettings SceneLoadingManagerSettings { get; private set; }
 
         [Header("Config")]
         [SerializeField] RectTransform m_OptionsWidget;
@@ -24,9 +25,6 @@ namespace Eu4ng.Framework.OutGame
         [Header("Scene Widgets Manager")]
         [SerializeField] List<RectTransform> m_GlobalStartupWidgetPrefabs;
 
-        [Header("Scene Loading Manager")]
-        [SerializeField] RectTransform m_LoadingWidgetPrefab;
-
         /* Properties */
 
         public RectTransform OptionsWidget => m_OptionsWidget;
@@ -38,9 +36,6 @@ namespace Eu4ng.Framework.OutGame
 
         // Scene Widgets Manager
         public List<RectTransform> GlobalStartupWidgetPrefabs => m_GlobalStartupWidgetPrefabs;
-
-        // Scene Loading Manager
-        public RectTransform LoadingWidgetPrefab => m_LoadingWidgetPrefab;
 
         /* DeveloperSettings */
 

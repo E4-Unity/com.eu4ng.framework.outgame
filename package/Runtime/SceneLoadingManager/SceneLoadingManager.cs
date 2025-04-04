@@ -32,7 +32,6 @@ namespace Eu4ng.Framework.OutGame
         /* Properties */
 
         IUIManager UIManagerInterface => UIManager.Instance;
-        OutGameFrameworkSettings Settings => OutGameFrameworkSettings.Instance;
 
         /* MonoSingleton */
 
@@ -48,17 +47,19 @@ namespace Eu4ng.Framework.OutGame
 
         public void LoadScene<T>(T scene) where T : struct, IConvertible
         {
+            var settings = SceneLoadingManagerSettings.Instance;
+
             // Check LoadingWidgetPrefab
-            if (Settings.LoadingWidgetPrefab == null ||
-                Settings.LoadingWidgetPrefab.GetComponent<ILoadingWidget>() == null)
+            if (settings.LoadingWidgetPrefab == null ||
+                settings.LoadingWidgetPrefab.GetComponent<ILoadingWidget>() == null)
             {
                 LoadSceneImmediately(scene);
                 return;
             }
 
             // Show LoadingWidgetPrefab
-            UIManagerInterface.ShowWidget(Settings.LoadingWidgetPrefab);
-            var loadingWidget = UIManagerInterface.GetWidget(Settings.LoadingWidgetPrefab);
+            UIManagerInterface.ShowWidget(settings.LoadingWidgetPrefab);
+            var loadingWidget = UIManagerInterface.GetWidget(settings.LoadingWidgetPrefab);
             var loadingWidgetInterface = loadingWidget.GetComponent<ILoadingWidget>();
 
             // Start Loading
