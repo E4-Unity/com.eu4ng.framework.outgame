@@ -152,7 +152,8 @@ namespace Eu4ng.Framework.OutGame
 
             // WidgetInstance 컴포넌트 부착
             var widgetInstance = widget.gameObject.AddComponent<WidgetInstance>();
-            widgetInstance.Initialize(widgetPrefab, isGlobalWidget);
+            widgetInstance.WidgetPrefab = widgetPrefab;
+            widgetInstance.IsGlobalWidget = isGlobalWidget;
 
             return widget;
         }

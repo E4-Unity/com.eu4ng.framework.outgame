@@ -5,17 +5,20 @@ namespace Eu4ng.Framework.OutGame
 {
     public class WidgetInstance : MonoBehaviour
     {
-        [field: SerializeField, ReadOnly] public RectTransform WidgetPrefab { get; private set; }
-        [field: SerializeField, ReadOnly] public bool IsGlobalWidget { get; private set; }
+        [SerializeField, ReadOnly] RectTransform m_WidgetPrefab;
 
-        public void Initialize(RectTransform widgetPrefab, bool isGlobalWidget)
+        public RectTransform WidgetPrefab
         {
-            if (widgetPrefab is null) return;
-            if (WidgetPrefab is not null) return;
-
-            WidgetPrefab = widgetPrefab;
-            IsGlobalWidget = isGlobalWidget;
+            get => m_WidgetPrefab;
+            set
+            {
+                if (value is null) return;
+                if (m_WidgetPrefab is not null) return;
+                m_WidgetPrefab = value;
+            }
         }
+        [field: SerializeField, ReadOnly] public bool IsGlobalWidget { get; set; }
+
         public void Show() => UIManager.Instance.ShowWidget(WidgetPrefab);
         public void Hide() => UIManager.Instance.HideWidget(WidgetPrefab);
     }

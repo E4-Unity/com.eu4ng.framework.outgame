@@ -36,10 +36,10 @@ namespace Eu4ng.Framework.OutGame
                 m_GlobalStartupWidgets.Add(globalStartupWidget);
 
                 // 위젯 프리팹 설정과 관계없이 위젯 인스턴스의 IsGlobalWidget를 true로 설정
-                var userWidgetInterface = globalStartupWidget.GetComponent<IUserWidget>();
-                if (!userWidgetInterface.IsGlobalWidget)
+                var widgetInstance = globalStartupWidget.GetComponent<WidgetInstance>();
+                if (!widgetInstance.IsGlobalWidget)
                 {
-                    userWidgetInterface.IsGlobalWidget = true;
+                    widgetInstance.IsGlobalWidget = true;
 
                     LogOutGameFramework.LogWarning(globalStartupWidgetPrefab.name + " is not set as global widget. Force set widgetInstance as global widget.");
                 }
@@ -69,10 +69,10 @@ namespace Eu4ng.Framework.OutGame
                 m_SceneStartupWidgets.Add(sceneStartupWidget);
 
                 // 위젯 프리팹 설정과 관계없이 위젯 인스턴스의 IsGlobalWidget를 false로 설정
-                var userWidgetInterface = sceneStartupWidget.GetComponent<IUserWidget>();
-                if (userWidgetInterface.IsGlobalWidget)
+                var widgetInstance = sceneStartupWidget.GetComponent<WidgetInstance>();
+                if (widgetInstance.IsGlobalWidget)
                 {
-                    userWidgetInterface.IsGlobalWidget = false;
+                    widgetInstance.IsGlobalWidget = false;
 
                     LogOutGameFramework.LogWarning(sceneStartupWidget.name + " is set as global widget. Force set widgetInstance as scene widget.");
                 }
