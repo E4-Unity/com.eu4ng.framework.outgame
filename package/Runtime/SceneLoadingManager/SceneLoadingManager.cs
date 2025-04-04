@@ -20,18 +20,16 @@ namespace Eu4ng.Framework.OutGame
     public class SceneLoadingManager : MonoSingleton<SceneLoadingManager>
     {
         /* Fields */
-        [Header("Config")]
-        [SerializeField] float m_MinimumLoadingScreenDisplayTime = 2.0f;
-        [SerializeField] float m_FadeTime = 2.0f;
 
-        [Header("State")]
-        [SerializeField, ReadOnly] LoadingStateType m_LoadingState = LoadingStateType.None;
+        [field: Header("State")]
+        [field: SerializeField, ReadOnly] public LoadingStateType LoadingState { get; private set; } = LoadingStateType.None;
 
         public event Action<LoadingStateType> LoadingStateChanged;
 
         /* Properties */
 
         IUIManager UIManagerInterface => UIManager.Instance;
+        SceneLoadingManagerSettings Settings => SceneLoadingManagerSettings.Instance;
 
         /* MonoSingleton */
 
@@ -47,7 +45,7 @@ namespace Eu4ng.Framework.OutGame
 
         public void LoadScene<T>(T scene) where T : struct, IConvertible
         {
-            var settings = SceneLoadingManagerSettings.Instance;
+            var settings = Settings;
 
             // Check LoadingWidgetPrefab
             if (settings.LoadingWidgetPrefab == null ||
@@ -68,11 +66,13 @@ namespace Eu4ng.Framework.OutGame
 
         protected virtual IEnumerator LoadSceneCoroutine(int buildIndex, ILoadingWidget loadingWidgetInterface)
         {
+            var settings = Settings;
+
             // 페이드 아웃
             SetState(LoadingStateType.FadeOut);
             loadingWidgetInterface.HideLoadingScreen();
-            loadingWidgetInterface.FadeOut(m_FadeTime);
-            yield return new WaitForSeconds(m_FadeTime);
+            loadingWidgetInterface.FadeOut(settings.FadeTime);
+            yield return new WaitForSeconds(settings.FadeTime);
 
             // 로딩창 표시
             SetState(LoadingStateType.Loading);
@@ -97,7 +97,7 @@ namespace Eu4ng.Framework.OutGame
             loadingWidgetInterface.UpdateLoadingState("Complete");
 
             // 고정 로딩 시간동안 대기
-            yield return new WaitForSeconds(m_MinimumLoadingScreenDisplayTime);
+            yield return new WaitForSeconds(settings.MinimumLoadingScreenDisplayTime);
 
             // 씬 전환
             loadingWidgetInterface.HideLoadingScreen();
@@ -109,8 +109,8 @@ namespace Eu4ng.Framework.OutGame
 
             // 페이드 인
             SetState(LoadingStateType.FadeIn);
-            loadingWidgetInterface.FadeIn(m_FadeTime);
-            yield return new WaitForSeconds(m_FadeTime);
+            loadingWidgetInterface.FadeIn(settings.FadeTime);
+            yield return new WaitForSeconds(settings.FadeTime);
 
             // 종료
             SetState(LoadingStateType.Done);
@@ -118,12 +118,12 @@ namespace Eu4ng.Framework.OutGame
 
         protected virtual void SetState(LoadingStateType loadingState)
         {
-            if (m_LoadingState == loadingState) return;
-            m_LoadingState = loadingState;
+            if (LoadingState == loadingState) return;
+            LoadingState = loadingState;
 
-            LoadingStateChanged?.Invoke(m_LoadingState);
+            LoadingStateChanged?.Invoke(LoadingState);
 
-            LogOutGameFramework.Log("LoadingState Changed: " + m_LoadingState);
+            LogOutGameFramework.Log("LoadingState Changed: " + LoadingState);
         }
     }
 }
