@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Eu4ng.Manager.Singleton;
 using UnityEngine;
 
@@ -22,9 +21,6 @@ namespace Eu4ng.Framework.OutGame
         [SerializeField] RectTransform m_ConfirmWidgetPrefab;
         [SerializeField] RectTransform m_PromptWidgetPrefab;
 
-        [Header("Scene Widgets Manager")]
-        [SerializeField] List<RectTransform> m_GlobalStartupWidgetPrefabs;
-
         /* Properties */
 
         public RectTransform OptionsWidget => m_OptionsWidget;
@@ -33,9 +29,6 @@ namespace Eu4ng.Framework.OutGame
         public RectTransform AlertWidgetPrefab => m_AlertWidgetPrefab;
         public RectTransform ConfirmWidgetPrefab => m_ConfirmWidgetPrefab;
         public RectTransform PromptWidgetPrefab => m_PromptWidgetPrefab;
-
-        // Scene Widgets Manager
-        public List<RectTransform> GlobalStartupWidgetPrefabs => m_GlobalStartupWidgetPrefabs;
 
         /* DeveloperSettings */
 

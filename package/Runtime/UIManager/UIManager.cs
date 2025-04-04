@@ -6,13 +6,12 @@ using UnityEngine.EventSystems;
 
 namespace Eu4ng.Framework.OutGame
 {
-    [RequireComponent(typeof(DynamicWidgetManager), typeof(ModalManager), typeof(SceneWidgetsManager))]
+    [RequireComponent(typeof(DynamicWidgetManager), typeof(ModalManager))]
     public class UIManager : GameSubsystem<UIManager>, IUIManager, IModalManager
     {
         [field: Header("Components")]
         [field: SerializeField, ReadOnly] public DynamicWidgetManager DynamicWidgetManager { get; private set; }
         [field: SerializeField, ReadOnly] public ModalManager ModalManager { get; private set; }
-        [field: SerializeField, ReadOnly] public SceneWidgetsManager SceneWidgetsManager { get; private set; }
 
         [field: Header("UI")]
         [field: SerializeField, ReadOnly] public Canvas GlobalCanvas { get; private set; }
@@ -50,7 +49,6 @@ namespace Eu4ng.Framework.OutGame
             DynamicWidgetManager = GetComponent<DynamicWidgetManager>();
             DynamicWidgetManager.GlobalCanvas = GlobalCanvas;
             ModalManager = GetComponent<ModalManager>();
-            SceneWidgetsManager = GetComponent<SceneWidgetsManager>();
         }
 
         /* UIManager */
