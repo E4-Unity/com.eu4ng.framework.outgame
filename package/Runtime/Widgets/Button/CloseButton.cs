@@ -1,3 +1,4 @@
+using Eu4ng.Utilities;
 using UnityEngine;
 
 namespace Eu4ng.Framework.OutGame
@@ -7,15 +8,35 @@ namespace Eu4ng.Framework.OutGame
     /// </summary>
     public class CloseButton : ButtonWidget
     {
-        [SerializeField] RectTransform m_RootWidget;
+        /* SerializeFields */
 
-        protected RectTransform WidgetPrefab => m_RootWidget == null ? null : m_RootWidget.GetComponent<IUserWidget>()?.Prefab;
+        [SerializeField, ReadOnly] WidgetInstance m_TargetWidgetInstanceComponent;
 
+        /* SerializeProperties */
+
+        [field: SerializeField] protected RectTransform TargetWidget { get; private set; }
+
+        /* Properties */
+
+        protected WidgetInstance TargetWidgetInstanceComponent =>
+            m_TargetWidgetInstanceComponent ?? TargetWidget?.GetComponent<WidgetInstance>();
+
+        /* CloseButton */
+        
         protected override void OnButtonClicked()
         {
             base.OnButtonClicked();
 
-            if (WidgetPrefab != null) HideWidget(WidgetPrefab);
+            if (TargetWidget == null) return;
+
+            if (TargetWidgetInstanceComponent is not null)
+            {
+                TargetWidgetInstanceComponent.Hide();
+            }
+            else
+            {
+                TargetWidget.gameObject.SetActive(false);
+            }
         }
     }
 }

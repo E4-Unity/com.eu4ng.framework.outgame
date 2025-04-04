@@ -1,8 +1,9 @@
 namespace Eu4ng.Framework.OutGame.Sample
 {
-    public enum SampleSceneType
+    internal enum SampleSceneType
     {
         MainMenu,
-        Main
+        Lobby,
+        Stage
     }
 }

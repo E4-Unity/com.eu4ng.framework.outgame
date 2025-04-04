@@ -1,4 +1,4 @@
-using System;
+using Eu4ng.Utilities;
 using UnityEngine;
 
 namespace Eu4ng.Framework.OutGame
@@ -6,9 +6,11 @@ namespace Eu4ng.Framework.OutGame
     /// <summary>
     /// 기본 위젯 클래스로 UIManager 클래스와 연동되어 있습니다.
     /// </summary>
-    public abstract class UserWidget : MonoBehaviour, IUserWidget, IUIManager, IModalManager
+    public abstract class UserWidget : MonoBehaviour, IUIManager, IModalManager
     {
-        RectTransform m_Prefab;
+        [SerializeField, ReadOnly] WidgetInstance m_WidgetInstanceComponent;
+
+        protected WidgetInstance WidgetInstanceComponent => m_WidgetInstanceComponent ??= GetComponent<WidgetInstance>();
 
         /* UserWidget */
 
@@ -25,17 +27,11 @@ namespace Eu4ng.Framework.OutGame
 
         /* IUserWidget */
 
-        public RectTransform Prefab
-        {
-            get => m_Prefab;
-            set => m_Prefab ??= value;
-        }
+        public void Show() => WidgetInstanceComponent.Show();
 
-        public void Show() => ShowWidget(Prefab);
+        public void Hide() => WidgetInstanceComponent.Hide();
 
-        public void Hide() => HideWidget(Prefab);
-
-        public void Remove() => RemoveWidget(Prefab);
+        public void Remove() => RemoveWidget(WidgetInstanceComponent.WidgetPrefab);
 
         [field: SerializeField]
         public bool IsGlobalWidget { get; set; }

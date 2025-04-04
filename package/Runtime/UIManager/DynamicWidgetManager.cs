@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Eu4ng.Utilities;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -12,21 +13,29 @@ namespace Eu4ng.Framework.OutGame
     {
         /* Fields */
 
-        [Header("References")]
-        [SerializeField] Canvas m_Canvas;
+        [Header("Dependencies")]
+        [SerializeField, ReadOnly] Canvas m_GlobalCanvas;
 
-        protected readonly Dictionary<RectTransform, RectTransform> m_WidgetDictionary = new Dictionary<RectTransform, RectTransform>();
+        public Canvas GlobalCanvas
+        {
+            get => m_GlobalCanvas;
+            set
+            {
+                if (value is null) return;
+                if (m_GlobalCanvas is not null) return;
+                m_GlobalCanvas = value;
+            }
+        }
 
         /* Properties */
 
-        protected Transform CanvasTransform => m_Canvas?.transform;
+        protected Dictionary<RectTransform, RectTransform> WidgetDictionary { get; private set; } = new Dictionary<RectTransform, RectTransform>();
+        protected Transform CanvasTransform => GlobalCanvas.transform;
 
         /* MonoBehaviour */
 
         protected virtual void Awake()
         {
-            if(m_Canvas == null) m_Canvas = GetComponentInChildren<Canvas>();
-
             SceneManager.activeSceneChanged += OnActiveSceneChanged;
         }
 
@@ -34,7 +43,7 @@ namespace Eu4ng.Framework.OutGame
 
         public RectTransform GetWidget(RectTransform widgetPrefab)
         {
-            m_WidgetDictionary.TryGetValue(widgetPrefab, out var widgetInstance);
+            WidgetDictionary.TryGetValue(widgetPrefab, out var widgetInstance);
 
             return widgetInstance;
         }
@@ -45,7 +54,7 @@ namespace Eu4ng.Framework.OutGame
             if (widgetPrefab == null) return;
 
             // 위젯 인스턴스 생성 혹은 가져오기
-            RectTransform widgetInstance = m_WidgetDictionary.TryGetValue(widgetPrefab, out var cachedWidgetInstance) ? cachedWidgetInstance : AddWidget(widgetPrefab);
+            RectTransform widgetInstance = WidgetDictionary.TryGetValue(widgetPrefab, out var cachedWidgetInstance) ? cachedWidgetInstance : AddWidget(widgetPrefab);
             if (widgetInstance == null) return;
 
             // 표시 여부 확인
@@ -66,7 +75,7 @@ namespace Eu4ng.Framework.OutGame
             if (widgetPrefab == null) return;
 
             // 등록 여부 확인
-            if (!m_WidgetDictionary.TryGetValue(widgetPrefab, out var widgetInstance))
+            if (!WidgetDictionary.TryGetValue(widgetPrefab, out var widgetInstance))
             {
                 LogOutGameFramework.Log("Widget(" + widgetPrefab.gameObject.name + ") is not added.");
                 return;
@@ -88,8 +97,8 @@ namespace Eu4ng.Framework.OutGame
         {
             // 유효성 검사
             if (widgetPrefab == null) return;
-            
-            if (!m_WidgetDictionary.TryGetValue(widgetPrefab, out var widgetInstance) || !widgetInstance.gameObject.activeSelf)
+
+            if (!WidgetDictionary.TryGetValue(widgetPrefab, out var widgetInstance) || !widgetInstance.gameObject.activeSelf)
             {
                 ShowWidget(widgetPrefab);
             }
@@ -105,11 +114,11 @@ namespace Eu4ng.Framework.OutGame
             if (widgetPrefab == null) return;
 
             // 등록 여부 확인
-            if (!m_WidgetDictionary.TryGetValue(widgetPrefab, out var widgetInstance)) return;
+            if (!WidgetDictionary.TryGetValue(widgetPrefab, out var widgetInstance)) return;
 
             // 위젯 인스턴스 파괴 및 등록 해제
             Destroy(widgetInstance.gameObject);
-            m_WidgetDictionary.Remove(widgetPrefab);
+            WidgetDictionary.Remove(widgetPrefab);
 
             LogOutGameFramework.Log("Remove widget(" + widgetPrefab.gameObject.name + ")");
         }
@@ -122,15 +131,8 @@ namespace Eu4ng.Framework.OutGame
             if (!CanvasTransform) return null;
             if (widgetPrefab == null) return null;
 
-            // 인터페이스 검사
-            if (widgetPrefab.GetComponent<IUserWidget>() == null)
-            {
-                LogOutGameFramework.LogError(widgetPrefab.name + " should implement IUserWidget");
-                return null;
-            }
-
             // 중복 검사
-            if (m_WidgetDictionary.TryGetValue(widgetPrefab, out var widgetInstance))
+            if (WidgetDictionary.TryGetValue(widgetPrefab, out var widgetInstance))
             {
                 LogOutGameFramework.LogWarning("Widget(" + widgetPrefab.gameObject.name + ") is already added.");
                 return widgetInstance;
@@ -139,7 +141,7 @@ namespace Eu4ng.Framework.OutGame
             {
                 // 위젯 인스턴스 생성 및 등록
                 widgetInstance = CreateWidgetInstance(widgetPrefab);
-                m_WidgetDictionary.Add(widgetPrefab, widgetInstance);
+                WidgetDictionary.Add(widgetPrefab, widgetInstance);
 
                 LogOutGameFramework.Log("Add widget(" + widgetPrefab.gameObject.name + ")");
                 return widgetInstance;
@@ -149,21 +151,26 @@ namespace Eu4ng.Framework.OutGame
         protected virtual RectTransform CreateWidgetInstance(RectTransform widgetPrefab)
         {
             // 위젯 인스턴스 생성
-            bool cachedActiveSelf = widgetPrefab.gameObject.activeSelf;
+            var cachedActiveSelf = widgetPrefab.gameObject.activeSelf;
             widgetPrefab.gameObject.SetActive(false);
-            RectTransform widgetInstance = Instantiate(widgetPrefab, CanvasTransform);
+            var widget = Instantiate(widgetPrefab, CanvasTransform);
             widgetPrefab.gameObject.SetActive(cachedActiveSelf);
 
-            // 위젯 인스턴스 초기화
-            IUserWidget userWidget = widgetInstance.GetComponent<IUserWidget>();
-            userWidget.Prefab = widgetPrefab;
+            // UserWidget 컴포넌트 가져오기
+            var userWidget = widget.GetComponent<UserWidget>();
+            var isGlobalWidget = userWidget?.IsGlobalWidget ?? false;
 
-            return widgetInstance;
+            // WidgetInstance 컴포넌트 부착
+            var widgetInstance = widget.gameObject.AddComponent<WidgetInstance>();
+            widgetInstance.WidgetPrefab = widgetPrefab;
+            widgetInstance.IsGlobalWidget = isGlobalWidget;
+
+            return widget;
         }
 
         protected virtual void RemoveAllWidgets()
         {
-            List<RectTransform> widgetPrefabs = new List<RectTransform>(m_WidgetDictionary.Keys);
+            List<RectTransform> widgetPrefabs = new List<RectTransform>(WidgetDictionary.Keys);
             foreach (var widgetPrefab in widgetPrefabs)
             {
                 RemoveWidget(widgetPrefab);
@@ -178,14 +185,11 @@ namespace Eu4ng.Framework.OutGame
         protected virtual void DestroySceneWidgets()
         {
             // GlobalWidget으로 설정된 위젯들을 제외한 모든 위젯 가져오기
-            List<RectTransform> widgetPrefabsToDestroy = new List<RectTransform>(m_WidgetDictionary.Count);
-            foreach (var pair in m_WidgetDictionary)
+            List<RectTransform> widgetPrefabsToDestroy = new List<RectTransform>(WidgetDictionary.Count);
+            foreach (var (widgetPrefab, widget) in WidgetDictionary)
             {
-                var widgetPrefab = pair.Key;
-                var widget = pair.Value;
-
-                IUserWidget userWidget = widget.GetComponent<IUserWidget>();
-                if(userWidget.IsGlobalWidget) continue;
+                var widgetInstance = widget.GetComponent<WidgetInstance>();
+                if(widgetInstance.IsGlobalWidget) continue;
 
                 widgetPrefabsToDestroy.Add(widgetPrefab);
             }

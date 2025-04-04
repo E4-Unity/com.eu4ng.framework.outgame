@@ -22,7 +22,7 @@ namespace Eu4ng.Framework.OutGame
 
         public static void ShowOptionsWidget()
         {
-            var settings = OutGameFrameworkSettings.Instance;
+            var settings = OtherSettings.Instance;
             if(settings.OptionsWidget != null) UIManager.Instance.ShowWidget(settings.OptionsWidget);
         }
     }

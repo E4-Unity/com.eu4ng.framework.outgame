@@ -1,7 +1,7 @@
 {
     "name": "com.eu4ng.framework.outgame",
     "displayName": "OutGame Framework",
-    "version": "0.1.1",
+    "version": "0.2.0",
     "unity": "6000.0",
     "author": {
         "name": "Eu4ng",
@@ -11,8 +11,8 @@
     "description": "OutGame Framework",
     "dependencies": {
         "com.eu4ng.manager.input": "https://github.com/E4-Unity/com.eu4ng.manager.input.git?path=/package#v0.1.0",
-        "com.eu4ng.manager.singleton": "https://github.com/E4-Unity/com.eu4ng.manager.singleton.git?path=/package#v0.1.0",
-        "com.eu4ng.utilities": "https://github.com/E4-Unity/com.eu4ng.utilities.git?path=/package#v0.1.0"
+        "com.eu4ng.manager.singleton": "https://github.com/E4-Unity/com.eu4ng.manager.singleton.git?path=/package#v0.2.0",
+        "com.eu4ng.utilities": "https://github.com/E4-Unity/com.eu4ng.utilities.git?path=/package#v0.1.1"
     },
     "samples": [
         {
