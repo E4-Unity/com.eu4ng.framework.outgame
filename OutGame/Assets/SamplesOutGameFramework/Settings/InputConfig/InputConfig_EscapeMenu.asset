@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d57f60def76ad16479a9a5851ae12997, type: 3}
-  m_Name: InputConfig_UserWidget
+  m_Name: InputConfig_EscapeMenu
   m_EditorClassIdentifier: 
   m_DataList:
-  - InputActionName: Escape
+  - InputActionName: Jump
     WidgetPrefab: {fileID: 7650946560657818344, guid: 072bd89010e372941a2fe4727493152e, type: 3}
