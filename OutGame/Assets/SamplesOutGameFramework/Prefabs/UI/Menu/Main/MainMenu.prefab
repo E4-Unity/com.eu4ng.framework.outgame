@@ -85,7 +85,6 @@ GameObject:
   - component: {fileID: 7433831022828275306}
   - component: {fileID: 3694173149897808106}
   - component: {fileID: 8593422672496830192}
-  - component: {fileID: 3607167886837415017}
   m_Layer: 5
   m_Name: MainMenu
   m_TagString: Untagged
@@ -152,20 +151,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &3607167886837415017
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 669948577415560358}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7a76c4cc6d1c614a903f55b7e5331e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_WidgetInstanceComponent: {fileID: 0}
-  <IsGlobalWidget>k__BackingField: 0
 --- !u!1 &1647628563543645341
 GameObject:
   m_ObjectHideFlags: 0
